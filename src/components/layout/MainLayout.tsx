@@ -18,24 +18,24 @@ export default function MainLayout({ children }: MainLayoutProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
+    <div className="min-h-screen bg-[#0a0a0a]">
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-screen w-64 glass-sidebar border-r border-white/[0.08]">
+      <aside className="fixed left-0 top-0 h-screen w-60 bg-[#0a0a0a] border-r border-[#1a1a1a]">
         {/* Logo */}
-        <div className="p-6 pb-8">
+        <div className="h-16 flex items-center px-6 border-b border-[#1a1a1a]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">M</span>
+            <div className="w-8 h-8 rounded-lg bg-[#fafafa] flex items-center justify-center">
+              <span className="text-[#0a0a0a] font-semibold text-sm">M</span>
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-white">MindClaw</h1>
-              <p className="text-xs text-zinc-500">Mission Control</p>
+              <h1 className="text-sm font-semibold text-[#fafafa]">MindClaw</h1>
+              <p className="text-xs text-[#666666]">Mission Control</p>
             </div>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="px-3 space-y-1">
+        <nav className="p-3 space-y-1">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path
             const Icon = item.icon
@@ -43,42 +43,42 @@ export default function MainLayout({ children }: MainLayoutProps) {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
+                className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ${
                   isActive
-                    ? 'bg-white/[0.08] text-white'
-                    : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
+                    ? 'bg-[#1a1a1a] text-[#fafafa]'
+                    : 'text-[#888888] hover:text-[#fafafa] hover:bg-[#141414]'
                 }`}
               >
-                <Icon className={`w-5 h-5 ${isActive ? 'text-blue-400' : ''}`} />
-                <span className="text-sm font-medium">{item.label}</span>
+                <Icon className={`w-4 h-4 ${isActive ? 'text-[#fafafa]' : 'text-[#666666]'}`} />
+                <span>{item.label}</span>
               </Link>
             )
           })}
         </nav>
 
         {/* Bottom Section */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/[0.08]">
-          <div className="flex items-center gap-3 px-3 py-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-              <span className="text-white text-xs font-medium">JC</span>
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#1a1a1a]">
+          <div className="flex items-center gap-3 px-2">
+            <div className="w-8 h-8 rounded-full bg-[#1a1a1a] flex items-center justify-center">
+              <span className="text-[#888888] text-xs font-medium">JC</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white truncate">Javier Correa</p>
-              <p className="text-xs text-zinc-500 truncate">Admin</p>
+              <p className="text-sm font-medium text-[#fafafa] truncate">Javier Correa</p>
+              <p className="text-xs text-[#666666] truncate">Admin</p>
             </div>
           </div>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="ml-64 min-h-screen">
+      <main className="ml-60 min-h-screen">
         {children}
       </main>
     </div>
   )
 }
 
-// Icon Components - Clean SVG icons
+// Icon Components - Clean, minimal SVG icons (Heroicons outline style)
 function DashboardIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

@@ -14,11 +14,11 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
 
   if (!agent) {
     return (
-      <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-8 text-center">
-        <div className="text-gray-400">Agent not found</div>
+      <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-8 text-center">
+        <div className="text-[#666666] text-sm">Agent not found</div>
         <button
           onClick={onClose}
-          className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg"
+          className="mt-4 px-4 py-2 bg-[#fafafa] hover:bg-[#e5e5e5] text-[#0a0a0a] rounded-md text-xs font-medium transition-colors duration-150"
         >
           Go Back
         </button>
@@ -35,48 +35,48 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-xl p-6">
+      <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
-            <div className="text-6xl">{agent.emoji}</div>
+            <div className="text-5xl">{agent.emoji}</div>
             <div>
-              <h2 className="text-2xl font-bold mb-1">{agent.name}</h2>
-              <div className="text-sm text-gray-400 mb-2">{agent.type}</div>
+              <h2 className="text-xl font-semibold text-[#fafafa] mb-1">{agent.name}</h2>
+              <div className="text-sm text-[#666666] mb-2">{agent.type}</div>
               <div className="flex items-center gap-2">
                 <div
-                  className={`w-3 h-3 rounded-full ${
+                  className={`w-1.5 h-1.5 rounded-full ${
                     agent.status === 'active'
-                      ? 'bg-green-400 animate-pulse'
+                      ? 'bg-emerald-500'
                       : agent.status === 'idle'
-                      ? 'bg-yellow-400'
-                      : 'bg-red-400'
+                      ? 'bg-amber-500'
+                      : 'bg-red-500'
                   }`}
                 />
-                <span className="text-sm text-gray-300 capitalize">{agent.status}</span>
+                <span className="text-xs text-[#888888] capitalize">{agent.status}</span>
               </div>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors text-2xl"
+            className="text-[#666666] hover:text-[#fafafa] transition-colors duration-150 text-sm"
           >
-            ✕
+            Close
           </button>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-4 mt-6">
-          <div className="bg-[#0d1321] rounded-lg p-4">
-            <div className="text-xs text-gray-400 mb-1">Tasks Completed</div>
-            <div className="text-2xl font-bold text-blue-400">{agent.tasks.toLocaleString()}</div>
+          <div className="bg-[#0a0a0a] rounded-md p-4">
+            <div className="text-xs text-[#666666] mb-1">Tasks Completed</div>
+            <div className="text-xl font-semibold text-[#fafafa]">{agent.tasks.toLocaleString()}</div>
           </div>
-          <div className="bg-[#0d1321] rounded-lg p-4">
-            <div className="text-xs text-gray-400 mb-1">Success Rate</div>
-            <div className="text-2xl font-bold text-green-400">{agent.successRate}%</div>
+          <div className="bg-[#0a0a0a] rounded-md p-4">
+            <div className="text-xs text-[#666666] mb-1">Success Rate</div>
+            <div className="text-xl font-semibold text-[#fafafa]">{agent.successRate}%</div>
           </div>
-          <div className="bg-[#0d1321] rounded-lg p-4">
-            <div className="text-xs text-gray-400 mb-1">Active Tasks</div>
-            <div className="text-2xl font-bold text-purple-400">{agentTasks.length}</div>
+          <div className="bg-[#0a0a0a] rounded-md p-4">
+            <div className="text-xs text-[#666666] mb-1">Active Tasks</div>
+            <div className="text-xl font-semibold text-[#fafafa]">{agentTasks.length}</div>
           </div>
         </div>
       </div>
@@ -86,32 +86,32 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
         {/* Configuration Panel */}
         <div className="lg:col-span-1 space-y-6">
           {/* Model Configuration */}
-          <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-6">
-            <h3 className="font-bold mb-4">Configuration</h3>
+          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+            <h3 className="text-sm font-semibold text-[#fafafa] mb-4">Configuration</h3>
             <div className="space-y-4">
               <div>
-                <div className="text-xs text-gray-400 mb-1">Model</div>
-                <div className="text-sm font-mono bg-gray-800 px-3 py-2 rounded">
+                <div className="text-xs text-[#666666] mb-1">Model</div>
+                <div className="text-xs font-mono bg-[#0a0a0a] px-3 py-2 rounded-md text-[#888888]">
                   {agent.model}
                 </div>
               </div>
 
               <div>
-                <div className="text-xs text-gray-400 mb-1">Temperature</div>
+                <div className="text-xs text-[#666666] mb-1">Temperature</div>
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 bg-gray-800 rounded-full h-2">
+                  <div className="flex-1 bg-[#0a0a0a] rounded-full h-1.5">
                     <div
-                      className="bg-blue-500 h-2 rounded-full"
+                      className="bg-[#fafafa] h-1.5 rounded-full"
                       style={{ width: `${(agent.temperature / 1) * 100}%` }}
                     />
                   </div>
-                  <span className="text-sm font-mono w-8">{agent.temperature}</span>
+                  <span className="text-xs font-mono text-[#888888] w-8">{agent.temperature}</span>
                 </div>
               </div>
 
               <div>
-                <div className="text-xs text-gray-400 mb-1">Max Tokens</div>
-                <div className="text-sm font-mono bg-gray-800 px-3 py-2 rounded">
+                <div className="text-xs text-[#666666] mb-1">Max Tokens</div>
+                <div className="text-xs font-mono bg-[#0a0a0a] px-3 py-2 rounded-md text-[#888888]">
                   {agent.maxTokens.toLocaleString()}
                 </div>
               </div>
@@ -119,16 +119,16 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
           </div>
 
           {/* Skills */}
-          <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-6">
-            <h3 className="font-bold mb-4">Skills Enabled</h3>
+          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+            <h3 className="text-sm font-semibold text-[#fafafa] mb-4">Skills Enabled</h3>
             <div className="space-y-2">
               {agent.skills.map((skill, i) => (
                 <div
                   key={i}
-                  className="flex items-center justify-between p-2 bg-gray-800 rounded"
+                  className="flex items-center justify-between p-2 bg-[#0a0a0a] rounded-md"
                 >
-                  <span className="text-sm">{skill.name}</span>
-                  <span className="text-xs text-gray-400">{skill.version}</span>
+                  <span className="text-xs text-[#fafafa]">{skill.name}</span>
+                  <span className="text-xs text-[#666666]">{skill.version}</span>
                 </div>
               ))}
             </div>
@@ -136,20 +136,19 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
 
           {/* Current Tasks */}
           {!isSupervisor && agentTasks.length > 0 && (
-            <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-6">
-              <h3 className="font-bold mb-4">Current Tasks</h3>
+            <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+              <h3 className="text-sm font-semibold text-[#fafafa] mb-4">Current Tasks</h3>
               <div className="space-y-2">
                 {agentTasks.map((task) => (
                   <div
                     key={task.id}
-                    className="p-3 bg-gray-800 rounded border-l-2"
-                    style={{ borderLeftColor: task.color }}
+                    className="p-3 bg-[#0a0a0a] rounded-md"
                   >
-                    <div className="text-sm font-semibold mb-1">{task.title}</div>
+                    <div className="text-xs font-medium text-[#fafafa] mb-1">{task.title}</div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-400 capitalize">{task.status}</span>
+                      <span className="text-xs text-[#666666] capitalize">{task.status}</span>
                       {task.duration && (
-                        <span className="text-xs text-gray-400">⏱️ {task.duration}</span>
+                        <span className="text-xs text-[#666666]">{task.duration}</span>
                       )}
                     </div>
                   </div>
@@ -162,18 +161,18 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
         {/* Logs & Supervision */}
         <div className="lg:col-span-2 space-y-6">
           {/* Live Execution Logs */}
-          <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-6">
+          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold">Live Execution Logs</h3>
+              <h3 className="text-sm font-semibold text-[#fafafa]">Execution Logs</h3>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-xs text-gray-400">Streaming</span>
+                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                <span className="text-xs text-[#666666]">Live</span>
               </div>
             </div>
 
-            <div className="space-y-2 max-h-96 overflow-y-auto">
+            <div className="space-y-1 max-h-80 overflow-y-auto">
               {agentLogs.length === 0 ? (
-                <div className="text-center py-8 text-gray-400 text-sm">
+                <div className="text-center py-8 text-[#666666] text-xs">
                   No logs yet
                 </div>
               ) : (
@@ -184,10 +183,10 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
 
           {/* Supervision Timeline */}
           {!isSupervisor && (
-            <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-6">
+            <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
               <div className="flex items-center gap-2 mb-4">
-                <h3 className="font-bold">Supervision Timeline</h3>
-                <span className="text-xs px-2 py-1 bg-blue-500/20 text-blue-400 rounded">
+                <h3 className="text-sm font-semibold text-[#fafafa]">Supervision Timeline</h3>
+                <span className="text-xs px-2 py-0.5 bg-[#1a1a1a] text-[#888888] rounded">
                   {agentSupervision.length} events
                 </span>
               </div>
@@ -197,33 +196,33 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
           )}
 
           {/* Performance Metrics */}
-          <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-6">
-            <h3 className="font-bold mb-4">Performance Metrics</h3>
+          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+            <h3 className="text-sm font-semibold text-[#fafafa] mb-4">Performance Metrics</h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-800 rounded-lg p-4">
-                <div className="text-xs text-gray-400 mb-2">Avg Execution Time</div>
-                <div className="text-xl font-bold text-cyan-400">1.2s</div>
-                <div className="text-xs text-green-400 mt-1">↓ 15% faster</div>
+              <div className="bg-[#0a0a0a] rounded-md p-4">
+                <div className="text-xs text-[#666666] mb-2">Avg Execution Time</div>
+                <div className="text-lg font-semibold text-[#fafafa]">1.2s</div>
+                <div className="text-xs text-emerald-500 mt-1">15% faster</div>
               </div>
 
-              <div className="bg-gray-800 rounded-lg p-4">
-                <div className="text-xs text-gray-400 mb-2">Error Rate</div>
-                <div className="text-xl font-bold text-green-400">
+              <div className="bg-[#0a0a0a] rounded-md p-4">
+                <div className="text-xs text-[#666666] mb-2">Error Rate</div>
+                <div className="text-lg font-semibold text-[#fafafa]">
                   {(100 - agent.successRate).toFixed(1)}%
                 </div>
-                <div className="text-xs text-green-400 mt-1">↓ 2% lower</div>
+                <div className="text-xs text-emerald-500 mt-1">2% lower</div>
               </div>
 
-              <div className="bg-gray-800 rounded-lg p-4">
-                <div className="text-xs text-gray-400 mb-2">Tasks Today</div>
-                <div className="text-xl font-bold text-purple-400">342</div>
-                <div className="text-xs text-green-400 mt-1">↑ 12% more</div>
+              <div className="bg-[#0a0a0a] rounded-md p-4">
+                <div className="text-xs text-[#666666] mb-2">Tasks Today</div>
+                <div className="text-lg font-semibold text-[#fafafa]">342</div>
+                <div className="text-xs text-emerald-500 mt-1">12% more</div>
               </div>
 
-              <div className="bg-gray-800 rounded-lg p-4">
-                <div className="text-xs text-gray-400 mb-2">Uptime</div>
-                <div className="text-xl font-bold text-blue-400">99.8%</div>
-                <div className="text-xs text-gray-400 mt-1">Last 30 days</div>
+              <div className="bg-[#0a0a0a] rounded-md p-4">
+                <div className="text-xs text-[#666666] mb-2">Uptime</div>
+                <div className="text-lg font-semibold text-[#fafafa]">99.8%</div>
+                <div className="text-xs text-[#666666] mt-1">Last 30 days</div>
               </div>
             </div>
           </div>

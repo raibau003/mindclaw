@@ -17,8 +17,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #0a0a0f;
-  color: #ffffff;
+  background-color: #0a0a0a;
+  color: #fafafa;
 }
 
 #root {
@@ -26,10 +26,10 @@ body {
   min-height: 100vh;
 }
 
-/* Professional Scrollbar */
+/* Clean Scrollbar - Vercel style */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -37,41 +37,15 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  background: #333333;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #444444;
 }
 
-/* Utility Classes */
-@layer utilities {
-  .glass-card {
-    background: rgba(20, 20, 28, 0.8);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .glass-sidebar {
-    background: rgba(18, 18, 26, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hover-lift {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-2px);
-  }
+/* Selection */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
 }

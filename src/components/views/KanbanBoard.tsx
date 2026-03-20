@@ -4,7 +4,7 @@ import TaskCard from '../tasks/TaskCard'
 import type { Task } from '../../store/useStore'
 
 const columns = [
-  { id: 'inbox', title: 'Inbox', color: '#6b7280' },
+  { id: 'inbox', title: 'Inbox', color: '#666666' },
   { id: 'in_progress', title: 'In Progress', color: '#3b82f6' },
   { id: 'review', title: 'Review', color: '#8b5cf6' },
   { id: 'done', title: 'Done', color: '#10b981' },
@@ -48,19 +48,16 @@ export default function KanbanBoard() {
           return (
             <div
               key={column.id}
-              className="bg-[#0d1321] border border-gray-800 rounded-xl p-4 min-h-[600px]"
+              className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-4 min-h-[500px]"
               onDragOver={handleDragOver}
               onDrop={(e) => handleDrop(e, column.id as Task['status'])}
             >
               {/* Column Header */}
-              <div className="mb-4">
-                <div
-                  className="font-bold text-sm mb-1"
-                  style={{ color: column.color }}
-                >
+              <div className="mb-4 pb-4 border-b border-[#1a1a1a]">
+                <div className="text-sm font-medium text-[#fafafa] mb-1">
                   {column.title}
                 </div>
-                <div className="text-xs text-gray-400">
+                <div className="text-xs text-[#666666]">
                   {columnTasks.length} {columnTasks.length === 1 ? 'task' : 'tasks'}
                 </div>
               </div>
@@ -68,7 +65,7 @@ export default function KanbanBoard() {
               {/* Tasks */}
               <div className="space-y-3">
                 {columnTasks.map((task) => (
-                  <div key={task.id} className={selectedTaskId === task.id ? 'ring-2 ring-blue-500 rounded-lg' : ''}>
+                  <div key={task.id} className={selectedTaskId === task.id ? 'ring-1 ring-[#fafafa] rounded-md' : ''}>
                     <TaskCard
                       task={task}
                       onClick={() => handleTaskClick(task.id)}
@@ -79,7 +76,7 @@ export default function KanbanBoard() {
                 ))}
 
                 {columnTasks.length === 0 && (
-                  <div className="text-center py-8 text-gray-600 text-sm border-2 border-dashed border-gray-800 rounded-lg">
+                  <div className="text-center py-8 text-[#444444] text-xs border border-dashed border-[#1a1a1a] rounded-md">
                     Drop tasks here
                   </div>
                 )}
@@ -91,47 +88,41 @@ export default function KanbanBoard() {
 
       {/* Task Detail Panel */}
       {selectedTask && (
-        <div className="w-96 bg-[#0d1321] border border-gray-800 rounded-xl p-6 animate-slide-in">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-lg">Task Details</h3>
+        <div className="w-80 bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-sm font-semibold text-[#fafafa]">Task Details</h3>
             <button
               onClick={() => selectTask(null)}
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-[#666666] hover:text-[#fafafa] transition-colors duration-150 text-sm"
             >
-              ✕
+              Close
             </button>
           </div>
 
           {/* Task Header */}
-          <div
-            className="p-4 rounded-lg mb-4 border-l-4"
-            style={{
-              borderLeftColor: selectedTask.color,
-              backgroundColor: `${selectedTask.color}10`,
-            }}
-          >
-            <div className="font-bold text-lg mb-2">{selectedTask.title}</div>
-            <div className="text-sm text-gray-400">{selectedTask.description}</div>
+          <div className="mb-6">
+            <div className="text-sm font-medium text-[#fafafa] mb-2">{selectedTask.title}</div>
+            <div className="text-xs text-[#666666]">{selectedTask.description}</div>
           </div>
 
           {/* Task Meta */}
           <div className="space-y-4">
             <div>
-              <div className="text-xs text-gray-400 mb-1">Assigned To</div>
-              <div className="px-3 py-2 bg-gray-800 rounded text-sm">
+              <div className="text-xs text-[#666666] mb-1">Assigned To</div>
+              <div className="px-3 py-2 bg-[#0a0a0a] rounded-md text-xs text-[#fafafa]">
                 {selectedTask.agentName}
               </div>
             </div>
 
             <div>
-              <div className="text-xs text-gray-400 mb-1">Priority</div>
+              <div className="text-xs text-[#666666] mb-1">Priority</div>
               <div
-                className={`px-3 py-2 rounded text-sm capitalize ${
+                className={`px-3 py-2 rounded-md text-xs capitalize ${
                   selectedTask.priority === 'high'
-                    ? 'bg-red-500/20 text-red-400'
+                    ? 'bg-red-500/10 text-red-400'
                     : selectedTask.priority === 'medium'
-                    ? 'bg-yellow-500/20 text-yellow-400'
-                    : 'bg-blue-500/20 text-blue-400'
+                    ? 'bg-amber-500/10 text-amber-400'
+                    : 'bg-blue-500/10 text-blue-400'
                 }`}
               >
                 {selectedTask.priority}
@@ -139,11 +130,11 @@ export default function KanbanBoard() {
             </div>
 
             <div>
-              <div className="text-xs text-gray-400 mb-1">Status</div>
+              <div className="text-xs text-[#666666] mb-1">Status</div>
               <select
                 value={selectedTask.status}
                 onChange={(e) => updateTaskStatus(selectedTask.id, e.target.value as Task['status'])}
-                className="w-full px-3 py-2 bg-gray-800 rounded text-sm text-white border border-gray-700 focus:border-blue-500 outline-none"
+                className="w-full px-3 py-2 bg-[#0a0a0a] rounded-md text-xs text-[#fafafa] border border-[#1a1a1a] focus:border-[#2a2a2a] outline-none"
               >
                 <option value="inbox">Inbox</option>
                 <option value="in_progress">In Progress</option>
@@ -154,21 +145,21 @@ export default function KanbanBoard() {
 
             {selectedTask.duration && (
               <div>
-                <div className="text-xs text-gray-400 mb-1">Duration</div>
-                <div className="px-3 py-2 bg-gray-800 rounded text-sm">
-                  ⏱️ {selectedTask.duration}
+                <div className="text-xs text-[#666666] mb-1">Duration</div>
+                <div className="px-3 py-2 bg-[#0a0a0a] rounded-md text-xs text-[#888888]">
+                  {selectedTask.duration}
                 </div>
               </div>
             )}
 
             {selectedTask.resources.length > 0 && (
               <div>
-                <div className="text-xs text-gray-400 mb-2">Resources</div>
-                <div className="flex flex-wrap gap-2">
+                <div className="text-xs text-[#666666] mb-2">Resources</div>
+                <div className="flex flex-wrap gap-1.5">
                   {selectedTask.resources.map((resource, i) => (
                     <span
                       key={i}
-                      className="px-2 py-1 bg-gray-800 text-gray-400 rounded text-xs"
+                      className="px-2 py-1 bg-[#0a0a0a] text-[#666666] rounded text-xs"
                     >
                       {resource}
                     </span>
@@ -178,16 +169,16 @@ export default function KanbanBoard() {
             )}
 
             <div>
-              <div className="text-xs text-gray-400 mb-1">Created</div>
-              <div className="text-sm text-gray-300">
+              <div className="text-xs text-[#666666] mb-1">Created</div>
+              <div className="text-xs text-[#888888]">
                 {new Date(selectedTask.createdAt).toLocaleString()}
               </div>
             </div>
 
             {selectedTask.completedAt && (
               <div>
-                <div className="text-xs text-gray-400 mb-1">Completed</div>
-                <div className="text-sm text-gray-300">
+                <div className="text-xs text-[#666666] mb-1">Completed</div>
+                <div className="text-xs text-[#888888]">
                   {new Date(selectedTask.completedAt).toLocaleString()}
                 </div>
               </div>
@@ -195,11 +186,11 @@ export default function KanbanBoard() {
           </div>
 
           {/* Actions */}
-          <div className="mt-6 pt-6 border-t border-gray-800 space-y-2">
-            <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-semibold transition-colors">
+          <div className="mt-6 pt-6 border-t border-[#1a1a1a] space-y-2">
+            <button className="w-full px-4 py-2 bg-[#fafafa] hover:bg-[#e5e5e5] text-[#0a0a0a] rounded-md text-xs font-medium transition-colors duration-150">
               View Agent Details
             </button>
-            <button className="w-full px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm font-semibold transition-colors">
+            <button className="w-full px-4 py-2 bg-[#1a1a1a] hover:bg-[#222222] text-[#fafafa] rounded-md text-xs font-medium transition-colors duration-150">
               View Logs
             </button>
           </div>

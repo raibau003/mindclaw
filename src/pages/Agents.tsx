@@ -53,20 +53,20 @@ export default function Agents() {
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white mb-2">Agents</h1>
-        <p className="text-zinc-400">Manage and monitor your AI agent workforce</p>
+        <h1 className="text-2xl font-semibold text-[#fafafa] mb-1">Agents</h1>
+        <p className="text-sm text-[#666666]">Manage and monitor your AI agent workforce</p>
       </div>
 
       {/* View Tabs */}
-      <div className="flex items-center gap-1 mb-8 border-b border-white/[0.08]">
+      <div className="flex items-center gap-1 mb-8 border-b border-[#1a1a1a]">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => handleViewChange(tab.id as ViewMode)}
-            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors border-b-2 -mb-px ${
+            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-150 border-b-2 -mb-px ${
               viewMode === tab.id
-                ? 'text-white border-blue-500'
-                : 'text-zinc-400 border-transparent hover:text-white hover:border-white/20'
+                ? 'text-[#fafafa] border-[#fafafa]'
+                : 'text-[#666666] border-transparent hover:text-[#fafafa]'
             }`}
           >
             {tab.icon}
@@ -74,7 +74,7 @@ export default function Agents() {
           </button>
         ))}
         {viewMode === 'detail' && selectedAgentId && (
-          <button className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-white border-b-2 border-blue-500 -mb-px">
+          <button className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-[#fafafa] border-b-2 border-[#fafafa] -mb-px">
             <DetailIcon />
             Agent Detail
           </button>
@@ -85,9 +85,9 @@ export default function Agents() {
       {viewMode === 'list' && (
         <div className="space-y-6">
           {/* Worker Agents */}
-          <div className="glass-card rounded-xl p-6">
-            <h2 className="text-lg font-semibold text-white mb-6">
-              Worker Agents <span className="text-zinc-500 font-normal">({agents.length})</span>
+          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+            <h2 className="text-sm font-semibold text-[#fafafa] mb-6">
+              Worker Agents <span className="text-[#666666] font-normal">({agents.length})</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {agents.map((agent) => (
@@ -101,9 +101,9 @@ export default function Agents() {
           </div>
 
           {/* Supervisor Agents */}
-          <div className="glass-card rounded-xl p-6">
-            <h2 className="text-lg font-semibold text-white mb-6">
-              Supervisor Agents <span className="text-zinc-500 font-normal">({supervisors.length})</span>
+          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+            <h2 className="text-sm font-semibold text-[#fafafa] mb-6">
+              Supervisor Agents <span className="text-[#666666] font-normal">({supervisors.length})</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {supervisors.map((supervisor) => (
