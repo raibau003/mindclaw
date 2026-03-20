@@ -56,6 +56,7 @@ export interface Room {
   id: string
   name: string
   icon: string
+  emoji: string
   color: string
   agents: string[]
 }

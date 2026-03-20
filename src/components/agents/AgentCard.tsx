@@ -27,7 +27,7 @@ export default function AgentCard({ agent, onClick, onDragStart, draggable = fal
 
   return (
     <div
-      className={`p-4 rounded-md bg-[#0a0a0a] border border-[#1a1a1a] hover:border-[#2a2a2a] transition-colors duration-150 ${
+      className={`p-4 rounded-md glass-card ${
         onClick ? 'cursor-pointer' : ''
       } ${draggable ? 'cursor-move' : ''}`}
       onClick={onClick}
@@ -39,19 +39,19 @@ export default function AgentCard({ agent, onClick, onDragStart, draggable = fal
         <div className="flex items-center gap-3">
           <div className="text-xl">{agent.emoji}</div>
           <div>
-            <p className="text-sm font-medium text-[#fafafa]">{agent.name}</p>
-            <p className="text-xs text-[#666666]">{agent.type}</p>
+            <p className="text-sm font-medium text-white glow-text">{agent.name}</p>
+            <p className="text-xs text-slate-300">{agent.type}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <div className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
-          <span className="text-xs text-[#666666]">{status.label}</span>
+          <span className="text-xs text-slate-300">{status.label}</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#1a1a1a]">
-        <span className="text-xs text-[#666666]">{agent.tasks} tasks</span>
-        <span className="text-xs text-[#888888]">{agent.successRate}%</span>
+      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+        <span className="text-xs text-slate-300">{agent.tasks} tasks</span>
+        <span className="text-xs text-white">{agent.successRate}%</span>
       </div>
     </div>
   )

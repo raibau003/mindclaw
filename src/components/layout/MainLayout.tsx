@@ -18,24 +18,24 @@ export default function MainLayout({ children }: MainLayoutProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
-      {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-screen w-60 bg-[#0a0a0a] border-r border-[#1a1a1a]">
+    <div className="min-h-screen">
+      {/* Sidebar with glassmorphism */}
+      <aside className="fixed left-0 top-0 h-screen w-64 glass-sidebar z-50">
         {/* Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-[#1a1a1a]">
+        <div className="h-16 flex items-center px-6 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#fafafa] flex items-center justify-center">
-              <span className="text-[#0a0a0a] font-semibold text-sm">M</span>
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center glow">
+              <span className="text-white font-bold text-lg">M</span>
             </div>
             <div>
-              <h1 className="text-sm font-semibold text-[#fafafa]">MindClaw</h1>
-              <p className="text-xs text-[#666666]">Mission Control</p>
+              <h1 className="text-base font-bold text-white glow-text">MindClaw</h1>
+              <p className="text-xs text-blue-300/80">Mission Control</p>
             </div>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="p-3 space-y-1">
+        <nav className="p-3 space-y-1.5 mt-2">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path
             const Icon = item.icon
@@ -43,13 +43,13 @@ export default function MainLayout({ children }: MainLayoutProps) {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ${
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? 'bg-[#1a1a1a] text-[#fafafa]'
-                    : 'text-[#888888] hover:text-[#fafafa] hover:bg-[#141414]'
+                    ? 'glass text-white glow'
+                    : 'text-slate-300 hover:text-white hover:glass-card'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#fafafa]' : 'text-[#666666]'}`} />
+                <Icon className={`w-5 h-5 ${isActive ? 'text-blue-400' : 'text-slate-400'}`} />
                 <span>{item.label}</span>
               </Link>
             )
@@ -57,21 +57,21 @@ export default function MainLayout({ children }: MainLayoutProps) {
         </nav>
 
         {/* Bottom Section */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#1a1a1a]">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 glass">
           <div className="flex items-center gap-3 px-2">
-            <div className="w-8 h-8 rounded-full bg-[#1a1a1a] flex items-center justify-center">
-              <span className="text-[#888888] text-xs font-medium">JC</span>
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <span className="text-white text-sm font-semibold">JC</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-[#fafafa] truncate">Javier Correa</p>
-              <p className="text-xs text-[#666666] truncate">Admin</p>
+              <p className="text-sm font-semibold text-white truncate">Javier Correa</p>
+              <p className="text-xs text-blue-300/70 truncate">Admin</p>
             </div>
           </div>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="ml-60 min-h-screen">
+      <main className="ml-64 min-h-screen p-6">
         {children}
       </main>
     </div>

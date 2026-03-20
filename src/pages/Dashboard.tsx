@@ -24,7 +24,7 @@ export default function Dashboard() {
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-[#fafafa] mb-1">
+        <h1 className="text-2xl font-semibold text-[#fafafa] mb-1 glow-text">
           Dashboard
         </h1>
         <p className="text-sm text-[#666666]">Monitor and manage your AI agent workforce</p>
@@ -80,12 +80,12 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Agents Column */}
         <div className="lg:col-span-1">
-          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+          <div className="glass-card rounded-lg p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-sm font-semibold text-[#fafafa]">Agents</h2>
+              <h2 className="text-sm font-semibold text-[#fafafa] glow-text">Agents</h2>
               <button
                 onClick={() => navigate('/agents')}
-                className="text-xs text-[#666666] hover:text-[#fafafa] transition-colors duration-150"
+                className="btn-primary text-xs px-3 py-1.5 rounded-md"
               >
                 View All
               </button>
@@ -121,12 +121,12 @@ export default function Dashboard() {
         {/* Tasks & Logs Column */}
         <div className="lg:col-span-2 space-y-6">
           {/* Recent Tasks */}
-          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+          <div className="glass-card rounded-lg p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-sm font-semibold text-[#fafafa]">Recent Tasks</h2>
+              <h2 className="text-sm font-semibold text-[#fafafa] glow-text">Recent Tasks</h2>
               <button
                 onClick={() => navigate('/agents?view=kanban')}
-                className="text-xs text-[#666666] hover:text-[#fafafa] transition-colors duration-150"
+                className="btn-primary text-xs px-3 py-1.5 rounded-md"
               >
                 View Kanban
               </button>
@@ -144,11 +144,11 @@ export default function Dashboard() {
           </div>
 
           {/* Live Logs */}
-          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
+          <div className="glass-card rounded-lg p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-sm font-semibold text-[#fafafa]">Activity</h2>
+              <h2 className="text-sm font-semibold text-[#fafafa] glow-text">Activity</h2>
               <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full glow" />
                 <span className="text-xs text-[#666666]">Live</span>
               </div>
             </div>
@@ -173,9 +173,9 @@ interface StatCardProps {
 
 function StatCard({ label, value, subtext }: StatCardProps) {
   return (
-    <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-5 hover:border-[#2a2a2a] transition-colors duration-150">
+    <div className="glass-card rounded-lg p-5">
       <p className="text-xs text-[#666666] mb-2">{label}</p>
-      <p className="text-2xl font-semibold text-[#fafafa] mb-1">{value}</p>
+      <p className="text-2xl font-semibold text-[#fafafa] mb-1 glow-text">{value}</p>
       <p className="text-xs text-[#444444]">{subtext}</p>
     </div>
   )
@@ -193,12 +193,12 @@ function QuickActionCard({ icon, title, description, onClick }: QuickActionCardP
   return (
     <button
       onClick={onClick}
-      className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-5 text-left hover:border-[#2a2a2a] transition-colors duration-150 w-full group"
+      className="glass-card rounded-lg p-5 text-left w-full group"
     >
-      <div className="w-9 h-9 rounded-md bg-[#1a1a1a] flex items-center justify-center mb-4 group-hover:bg-[#222222] transition-colors duration-150">
+      <div className="w-9 h-9 rounded-md glass flex items-center justify-center mb-4 transition-all duration-150">
         {icon}
       </div>
-      <h3 className="text-sm font-medium text-[#fafafa] mb-1">
+      <h3 className="text-sm font-medium text-[#fafafa] mb-1 glow-text">
         {title}
       </h3>
       <p className="text-xs text-[#666666]">{description}</p>

@@ -10,16 +10,16 @@ interface TaskCardProps {
 export default function TaskCard({ task, onClick, onDragStart, draggable = true }: TaskCardProps) {
   const priorityConfig = {
     low: {
-      bg: 'bg-blue-500/10',
-      text: 'text-blue-400',
+      bg: 'bg-blue-500/20',
+      text: 'text-blue-300',
     },
     medium: {
-      bg: 'bg-amber-500/10',
-      text: 'text-amber-400',
+      bg: 'bg-amber-500/20',
+      text: 'text-amber-300',
     },
     high: {
-      bg: 'bg-red-500/10',
-      text: 'text-red-400',
+      bg: 'bg-red-500/20',
+      text: 'text-red-300',
     },
   }
 
@@ -27,27 +27,27 @@ export default function TaskCard({ task, onClick, onDragStart, draggable = true 
 
   return (
     <div
-      className="p-4 rounded-md bg-[#0a0a0a] border border-[#1a1a1a] hover:border-[#2a2a2a] transition-colors duration-150 cursor-pointer"
+      className="p-4 rounded-md glass-card hover:border-white/20 transition-all duration-150 cursor-pointer"
       onClick={onClick}
       onDragStart={onDragStart}
       draggable={draggable}
       data-task-id={task.id}
     >
       <div className="flex items-start justify-between gap-3 mb-3">
-        <h4 className="text-sm font-medium text-[#fafafa] leading-tight">{task.title}</h4>
-        <span className={`text-xs px-2 py-0.5 rounded ${priority.bg} ${priority.text} whitespace-nowrap`}>
+        <h4 className="text-sm font-medium text-white leading-tight">{task.title}</h4>
+        <span className={`text-xs px-2 py-0.5 rounded ${priority.bg} ${priority.text} whitespace-nowrap font-medium`}>
           {task.priority}
         </span>
       </div>
 
-      <p className="text-xs text-[#666666] mb-4 line-clamp-2">{task.description}</p>
+      <p className="text-xs text-slate-300 mb-4 line-clamp-2">{task.description}</p>
 
       <div className="flex items-center justify-between">
-        <span className="text-xs px-2 py-1 rounded bg-[#1a1a1a] text-[#888888]">
+        <span className="text-xs px-2 py-1 rounded bg-white/5 text-slate-300 backdrop-blur-sm">
           {task.agentName}
         </span>
         {task.duration && (
-          <span className="text-xs text-[#666666] flex items-center gap-1">
+          <span className="text-xs text-slate-300 flex items-center gap-1">
             <ClockIcon />
             {task.duration}
           </span>
@@ -55,9 +55,9 @@ export default function TaskCard({ task, onClick, onDragStart, draggable = true 
       </div>
 
       {task.resources.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#1a1a1a]">
+        <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-white/10">
           {task.resources.map((resource, i) => (
-            <span key={i} className="text-xs px-2 py-0.5 rounded bg-[#141414] text-[#666666]">
+            <span key={i} className="text-xs px-2 py-0.5 rounded bg-white/5 text-slate-300 backdrop-blur-sm">
               {resource}
             </span>
           ))}

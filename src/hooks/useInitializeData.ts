@@ -210,12 +210,12 @@ export function useInitializeData() {
 
     // Initialize rooms
     const rooms: Room[] = [
-      { id: 'conference', name: 'Conference Room', icon: '🎯', color: '#3b82f6', agents: [] },
-      { id: 'automation-lab', name: 'Automation Lab', icon: '⚙️', color: '#10b981', agents: ['automation'] },
-      { id: 'analytics', name: 'Analytics Studio', icon: '📊', color: '#8b5cf6', agents: ['data-engineer'] },
-      { id: 'ml-lab', name: 'ML Lab', icon: '🧠', color: '#f59e0b', agents: ['data-science'] },
-      { id: 'dev-studio', name: 'Dev Studio', icon: '💻', color: '#06b6d4', agents: ['developer'] },
-      { id: 'security', name: 'Security Ops', icon: '🛡️', color: '#ef4444', agents: ['vision'] },
+      { id: 'conference', name: 'Conference Room', icon: '🎯', emoji: '🎯', color: '#3b82f6', agents: [] },
+      { id: 'automation-lab', name: 'Automation Lab', icon: '⚙️', emoji: '⚙️', color: '#10b981', agents: ['automation'] },
+      { id: 'analytics', name: 'Analytics Studio', icon: '📊', emoji: '📊', color: '#8b5cf6', agents: ['data-engineer'] },
+      { id: 'ml-lab', name: 'ML Lab', icon: '🧠', emoji: '🧠', color: '#f59e0b', agents: ['data-science'] },
+      { id: 'dev-studio', name: 'Dev Studio', icon: '💻', emoji: '💻', color: '#06b6d4', agents: ['developer'] },
+      { id: 'security', name: 'Security Ops', icon: '🛡️', emoji: '🛡️', color: '#ef4444', agents: ['vision'] },
     ]
 
     setAgents(agents)

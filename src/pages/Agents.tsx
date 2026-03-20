@@ -3,10 +3,11 @@ import { useSearchParams } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 import AgentCard from '../components/agents/AgentCard'
 import VirtualOffice from '../components/views/VirtualOffice'
+import VirtualOffice3D from '../components/views/VirtualOffice3D'
 import KanbanBoard from '../components/views/KanbanBoard'
 import AgentDetail from '../components/views/AgentDetail'
 
-type ViewMode = 'list' | 'office' | 'kanban' | 'detail'
+type ViewMode = 'list' | 'office' | 'office3d' | 'kanban' | 'detail'
 
 export default function Agents() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -45,7 +46,8 @@ export default function Agents() {
 
   const tabs = [
     { id: 'list', label: 'List View', icon: <ListIcon /> },
-    { id: 'office', label: 'Virtual Office', icon: <BuildingIcon /> },
+    { id: 'office', label: 'Virtual Office 2D', icon: <BuildingIcon /> },
+    { id: 'office3d', label: 'Virtual Office 3D', icon: <CubeIcon /> },
     { id: 'kanban', label: 'Kanban Board', icon: <KanbanIcon /> },
   ]
 
@@ -53,20 +55,20 @@ export default function Agents() {
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-[#fafafa] mb-1">Agents</h1>
-        <p className="text-sm text-[#666666]">Manage and monitor your AI agent workforce</p>
+        <h1 className="text-2xl font-semibold glow-text mb-1">Agents</h1>
+        <p className="text-sm text-[#888]">Manage and monitor your AI agent workforce</p>
       </div>
 
       {/* View Tabs */}
-      <div className="flex items-center gap-1 mb-8 border-b border-[#1a1a1a]">
+      <div className="flex items-center gap-1 mb-8 border-b border-white/10">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => handleViewChange(tab.id as ViewMode)}
-            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-150 border-b-2 -mb-px ${
+            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all duration-200 border-b-2 -mb-px ${
               viewMode === tab.id
-                ? 'text-[#fafafa] border-[#fafafa]'
-                : 'text-[#666666] border-transparent hover:text-[#fafafa]'
+                ? 'text-white border-cyan-400 bg-white/5 backdrop-blur-sm'
+                : 'text-[#888] border-transparent hover:text-white hover:bg-white/5'
             }`}
           >
             {tab.icon}
@@ -74,7 +76,7 @@ export default function Agents() {
           </button>
         ))}
         {viewMode === 'detail' && selectedAgentId && (
-          <button className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-[#fafafa] border-b-2 border-[#fafafa] -mb-px">
+          <button className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-white border-b-2 border-cyan-400 bg-white/5 backdrop-blur-sm -mb-px">
             <DetailIcon />
             Agent Detail
           </button>
@@ -85,9 +87,9 @@ export default function Agents() {
       {viewMode === 'list' && (
         <div className="space-y-6">
           {/* Worker Agents */}
-          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
-            <h2 className="text-sm font-semibold text-[#fafafa] mb-6">
-              Worker Agents <span className="text-[#666666] font-normal">({agents.length})</span>
+          <div className="glass-card p-6">
+            <h2 className="text-sm font-semibold text-white mb-6">
+              Worker Agents <span className="text-[#888] font-normal">({agents.length})</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {agents.map((agent) => (
@@ -101,9 +103,9 @@ export default function Agents() {
           </div>
 
           {/* Supervisor Agents */}
-          <div className="bg-[#111111] border border-[#1a1a1a] rounded-lg p-6">
-            <h2 className="text-sm font-semibold text-[#fafafa] mb-6">
-              Supervisor Agents <span className="text-[#666666] font-normal">({supervisors.length})</span>
+          <div className="glass-card p-6">
+            <h2 className="text-sm font-semibold text-white mb-6">
+              Supervisor Agents <span className="text-[#888] font-normal">({supervisors.length})</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {supervisors.map((supervisor) => (
@@ -119,6 +121,7 @@ export default function Agents() {
       )}
 
       {viewMode === 'office' && <VirtualOffice onAgentClick={handleAgentClick} />}
+      {viewMode === 'office3d' && <VirtualOffice3D />}
       {viewMode === 'kanban' && <KanbanBoard />}
       {viewMode === 'detail' && selectedAgentId && (
         <AgentDetail
@@ -163,6 +166,14 @@ function DetailIcon() {
   return (
     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+    </svg>
+  )
+}
+
+function CubeIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
     </svg>
   )
 }
