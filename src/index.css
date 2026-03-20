@@ -28,11 +28,3 @@ body {
   width: 100%;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-gray-50 text-gray-900;
-  }
-}
