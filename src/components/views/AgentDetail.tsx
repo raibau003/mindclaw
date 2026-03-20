@@ -18,7 +18,7 @@ export default function AgentDetail({ agentId, onClose }: AgentDetailProps) {
         <div className="text-slate-300 text-sm">Agent not found</div>
         <button
           onClick={onClose}
-          className="btn-primary mt-4"
+          className="btn-primary mt-4 px-6 py-2 rounded-md text-white text-sm font-medium"
         >
           Go Back
         </button>

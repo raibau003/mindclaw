@@ -48,7 +48,7 @@ export default function KanbanBoard() {
           return (
             <div
               key={column.id}
-              className="glass-card border-white/10 rounded-lg p-4 min-h-[500px]"
+              className="glass-card border border-white/10 rounded-lg p-4 min-h-[500px]"
               onDragOver={handleDragOver}
               onDrop={(e) => handleDrop(e, column.id as Task['status'])}
             >
@@ -90,7 +90,7 @@ export default function KanbanBoard() {
 
       {/* Task Detail Panel */}
       {selectedTask && (
-        <div className="w-80 glass-card border-white/10 rounded-lg p-6">
+        <div className="w-80 glass-card border border-white/10 rounded-lg p-6">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-sm font-semibold text-white glow-text">Task Details</h3>
             <button
@@ -189,7 +189,7 @@ export default function KanbanBoard() {
 
           {/* Actions */}
           <div className="mt-6 pt-6 border-t border-white/10 space-y-2">
-            <button className="btn-primary w-full">
+            <button className="btn-primary w-full px-4 py-2 rounded-md text-white text-xs font-medium">
               View Agent Details
             </button>
             <button className="w-full px-4 py-2 glass border border-white/20 hover:border-white/40 text-white rounded-md text-xs font-medium transition-all duration-150">

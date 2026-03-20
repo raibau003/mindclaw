@@ -50,7 +50,7 @@ export default function Governance() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Supervisors */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="glass-card p-6">
+          <div className="glass-card border border-white/10 rounded-lg p-6">
             <h2 className="text-sm font-semibold text-cyan-300 mb-6">Supervisor Agents</h2>
             <div className="space-y-3">
               {supervisors.map((supervisor) => (
@@ -70,7 +70,7 @@ export default function Governance() {
           </div>
 
           {/* Supervision Stats */}
-          <div className="glass-card p-6">
+          <div className="glass-card border border-white/10 rounded-lg p-6">
             <h3 className="text-sm font-semibold text-cyan-300 mb-4">Supervision Stats</h3>
             <div className="space-y-2">
               <div className="flex items-center justify-between p-3 glass rounded-md">
@@ -91,7 +91,7 @@ export default function Governance() {
 
         {/* Supervision Timeline */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="glass-card p-6">
+          <div className="glass-card border border-white/10 rounded-lg p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-sm font-semibold text-cyan-300">Live Supervision Timeline</h2>
               <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ export default function Governance() {
           </div>
 
           {/* How It Works */}
-          <div className="glass-card p-6">
+          <div className="glass-card border border-white/10 rounded-lg p-6">
             <h3 className="text-sm font-semibold text-cyan-300 mb-4">How Supervision Works</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 glass border border-white/10 rounded-md hover:border-cyan-400/40 transition-colors">
@@ -157,7 +157,7 @@ interface StatCardProps {
 
 function StatCard({ label, value, subtext }: StatCardProps) {
   return (
-    <div className="glass-card p-5 hover:border-cyan-400/40 transition-colors duration-150">
+    <div className="glass-card border border-white/10 rounded-lg p-5 hover:border-cyan-400/40 transition-colors duration-150">
       <p className="text-xs text-cyan-200/70 mb-2">{label}</p>
       <p className="text-2xl font-semibold text-white mb-1">{value}</p>
       <p className="text-xs text-cyan-300/50">{subtext}</p>

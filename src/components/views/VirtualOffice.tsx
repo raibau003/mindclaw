@@ -42,7 +42,7 @@ export default function VirtualOffice({ onAgentClick }: VirtualOfficeProps) {
         </div>
         <button
           onClick={handleGatherAll}
-          className="btn-primary"
+          className="btn-primary px-4 py-2 rounded-md text-sm text-white font-medium"
         >
           Gather All in Conference
         </button>

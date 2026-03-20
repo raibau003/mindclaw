@@ -56,7 +56,7 @@ export default function Agents() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-semibold glow-text mb-1">Agents</h1>
-        <p className="text-sm text-[#888]">Manage and monitor your AI agent workforce</p>
+        <p className="text-sm text-slate-400">Manage and monitor your AI agent workforce</p>
       </div>
 
       {/* View Tabs */}
@@ -68,7 +68,7 @@ export default function Agents() {
             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all duration-200 border-b-2 -mb-px ${
               viewMode === tab.id
                 ? 'text-white border-cyan-400 bg-white/5 backdrop-blur-sm'
-                : 'text-[#888] border-transparent hover:text-white hover:bg-white/5'
+                : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'
             }`}
           >
             {tab.icon}
@@ -87,9 +87,9 @@ export default function Agents() {
       {viewMode === 'list' && (
         <div className="space-y-6">
           {/* Worker Agents */}
-          <div className="glass-card p-6">
+          <div className="glass-card border border-white/10 rounded-lg p-6">
             <h2 className="text-sm font-semibold text-white mb-6">
-              Worker Agents <span className="text-[#888] font-normal">({agents.length})</span>
+              Worker Agents <span className="text-slate-400 font-normal">({agents.length})</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {agents.map((agent) => (
@@ -103,9 +103,9 @@ export default function Agents() {
           </div>
 
           {/* Supervisor Agents */}
-          <div className="glass-card p-6">
+          <div className="glass-card border border-white/10 rounded-lg p-6">
             <h2 className="text-sm font-semibold text-white mb-6">
-              Supervisor Agents <span className="text-[#888] font-normal">({supervisors.length})</span>
+              Supervisor Agents <span className="text-slate-400 font-normal">({supervisors.length})</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {supervisors.map((supervisor) => (
