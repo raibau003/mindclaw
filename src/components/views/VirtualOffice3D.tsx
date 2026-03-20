@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Text } from '@react-three/drei'
 import { useStore } from '../../store/useStore'
-import { useMemo } from 'react'
+import { useMemo, Suspense } from 'react'
 
 interface Room3DProps {
   position: [number, number, number]
@@ -99,16 +99,19 @@ function AgentSphere3D({ position, color, emoji, name }: AgentSphere3DProps) {
 export default function VirtualOffice3D() {
   const { agents, rooms } = useStore()
 
+  const safeAgents = agents || []
+  const safeRooms = rooms || []
+
   // Calculate agent positions within rooms
   const agentPositions = useMemo(() => {
     const positions: Record<string, number> = {}
 
-    return agents.map(agent => {
-      const room = rooms.find(r => r.id === agent.room)
+    return safeAgents.map(agent => {
+      const room = safeRooms.find(r => r.id === agent.room)
       if (!room) return null
 
       // Get room position
-      const roomIndex = rooms.indexOf(room)
+      const roomIndex = safeRooms.indexOf(room)
       const row = Math.floor(roomIndex / 3)
       const col = roomIndex % 3
       const roomX = col * 3 - 3
@@ -125,8 +128,8 @@ export default function VirtualOffice3D() {
         position: [roomX + offset, 0, roomZ] as [number, number, number],
         color: room.color
       }
-    }).filter(Boolean) as Array<{ agent: typeof agents[0], position: [number, number, number], color: string }>
-  }, [agents, rooms])
+    }).filter(Boolean) as Array<{ agent: typeof safeAgents[0], position: [number, number, number], color: string }>
+  }, [safeAgents, safeRooms])
 
   // Room positions in 3D grid (2 rows x 3 columns)
   const roomPositions: Array<[number, number, number]> = [
@@ -139,52 +142,63 @@ export default function VirtualOffice3D() {
   ]
 
   return (
-    <div className="w-full h-[600px] glass-card rounded-xl overflow-hidden">
-      <Canvas>
-        <PerspectiveCamera makeDefault position={[5, 8, 5]} fov={50} />
-        <OrbitControls
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-          minPolarAngle={Math.PI / 6}
-          maxPolarAngle={Math.PI / 2.5}
-        />
-
-        {/* Lighting */}
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} color="#3b82f6" />
-        <pointLight position={[-10, 10, -10]} intensity={0.5} color="#8b5cf6" />
-        <spotLight position={[0, 15, 0]} intensity={0.8} angle={0.6} penumbra={1} color="#60a5fa" />
-
-        {/* Rooms */}
-        {rooms.map((room, index) => {
-          const agentsInRoom = agents.filter(a => a.room === room.id).length
-          return (
-            <Room3D
-              key={room.id}
-              position={roomPositions[index]}
-              color={room.color}
-              name={room.name}
-              emoji={room.emoji}
-              agentCount={agentsInRoom}
-            />
-          )
-        })}
-
-        {/* Agents */}
-        {agentPositions.map(({ agent, position, color }) => (
-          <AgentSphere3D
-            key={agent.id}
-            position={position}
-            color={color}
-            emoji={agent.emoji}
-            name={agent.name}
+    <div className="w-full h-[600px] glass-card rounded-xl overflow-hidden relative">
+      <Suspense
+        fallback={
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-4xl mb-4 animate-pulse">🌐</div>
+              <p className="text-sm text-slate-300">Loading 3D Environment...</p>
+            </div>
+          </div>
+        }
+      >
+        <Canvas>
+          <PerspectiveCamera makeDefault position={[5, 8, 5]} fov={50} />
+          <OrbitControls
+            enablePan={true}
+            enableZoom={true}
+            enableRotate={true}
+            minPolarAngle={Math.PI / 6}
+            maxPolarAngle={Math.PI / 2.5}
           />
-        ))}
 
-        {/* Grid floor */}
-        <gridHelper args={[20, 20, '#334155', '#1e293b']} position={[0, -0.05, 0]} />
-      </Canvas>
+          {/* Lighting */}
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1} color="#3b82f6" />
+          <pointLight position={[-10, 10, -10]} intensity={0.5} color="#8b5cf6" />
+          <spotLight position={[0, 15, 0]} intensity={0.8} angle={0.6} penumbra={1} color="#60a5fa" />
+
+          {/* Rooms */}
+          {safeRooms.map((room, index) => {
+            const agentsInRoom = safeAgents.filter(a => a.room === room.id).length
+            return (
+              <Room3D
+                key={room.id}
+                position={roomPositions[index]}
+                color={room.color}
+                name={room.name}
+                emoji={room.emoji}
+                agentCount={agentsInRoom}
+              />
+            )
+          })}
+
+          {/* Agents */}
+          {agentPositions.map(({ agent, position, color }) => (
+            <AgentSphere3D
+              key={agent.id}
+              position={position}
+              color={color}
+              emoji={agent.emoji}
+              name={agent.name}
+            />
+          ))}
+
+          {/* Grid floor */}
+          <gridHelper args={[20, 20, '#334155', '#1e293b']} position={[0, -0.05, 0]} />
+        </Canvas>
+      </Suspense>
 
       {/* Controls legend */}
       <div className="absolute bottom-4 left-4 glass px-4 py-2 rounded-lg">

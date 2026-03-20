@@ -9,6 +9,9 @@ export default function VirtualOffice({ onAgentClick }: VirtualOfficeProps) {
   const { agents, rooms, moveAgentToRoom } = useStore()
   const [draggedAgent, setDraggedAgent] = useState<string | null>(null)
 
+  const safeAgents = agents || []
+  const safeRooms = rooms || []
+
   const handleDragStart = (e: React.DragEvent, agentId: string) => {
     setDraggedAgent(agentId)
     e.dataTransfer.effectAllowed = 'move'
@@ -28,7 +31,7 @@ export default function VirtualOffice({ onAgentClick }: VirtualOfficeProps) {
   }
 
   const handleGatherAll = () => {
-    agents.forEach((agent) => {
+    safeAgents.forEach((agent) => {
       moveAgentToRoom(agent.id, 'conference')
     })
   }
@@ -50,8 +53,8 @@ export default function VirtualOffice({ onAgentClick }: VirtualOfficeProps) {
 
       {/* Office Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {rooms.map((room) => {
-          const roomAgents = agents.filter((a) => a.room === room.id)
+        {safeRooms.map((room) => {
+          const roomAgents = safeAgents.filter((a) => a.room === room.id)
 
           return (
             <div

@@ -7,11 +7,15 @@ export default function Governance() {
   const navigate = useNavigate()
   const { supervisors, supervisionEvents, agents } = useStore()
 
-  const totalSupervisions = supervisionEvents.length
-  const qaEvents = supervisionEvents.filter((e) => e.type === 'qa').length
-  const errorRecoveries = supervisionEvents.filter((e) => e.type === 'error_recovery').length
-  const avgInterventionRate = agents.length > 0
-    ? ((supervisionEvents.length / agents.length) * 100).toFixed(1)
+  const safeSupervisors = supervisors || []
+  const safeSupervisionEvents = supervisionEvents || []
+  const safeAgents = agents || []
+
+  const totalSupervisions = safeSupervisionEvents.length
+  const qaEvents = safeSupervisionEvents.filter((e) => e.type === 'qa').length
+  const errorRecoveries = safeSupervisionEvents.filter((e) => e.type === 'error_recovery').length
+  const avgInterventionRate = safeAgents.length > 0
+    ? ((safeSupervisionEvents.length / safeAgents.length) * 100).toFixed(1)
     : '0.0'
 
   return (
@@ -26,8 +30,8 @@ export default function Governance() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard
           label="Active Supervisors"
-          value={supervisors.length.toString()}
-          subtext={`monitoring ${agents.length} agents`}
+          value={safeSupervisors.length.toString()}
+          subtext={`monitoring ${safeAgents.length} agents`}
         />
         <StatCard
           label="QA Reviews"
@@ -53,7 +57,7 @@ export default function Governance() {
           <div className="glass-card border border-white/10 rounded-lg p-6">
             <h2 className="text-sm font-semibold text-cyan-300 mb-6">Supervisor Agents</h2>
             <div className="space-y-3">
-              {supervisors.map((supervisor) => (
+              {safeSupervisors.map((supervisor) => (
                 <AgentCard
                   key={supervisor.id}
                   agent={supervisor}
@@ -101,7 +105,7 @@ export default function Governance() {
             </div>
 
             <div className="space-y-4 max-h-[600px] overflow-y-auto">
-              {supervisionEvents.length === 0 ? (
+              {safeSupervisionEvents.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="w-12 h-12 rounded-lg glass flex items-center justify-center mx-auto mb-4">
                     <SearchIcon />
@@ -112,7 +116,7 @@ export default function Governance() {
                   </p>
                 </div>
               ) : (
-                <SupervisionTimeline events={supervisionEvents} />
+                <SupervisionTimeline events={safeSupervisionEvents} />
               )}
             </div>
           </div>

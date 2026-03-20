@@ -14,6 +14,8 @@ export default function KanbanBoard() {
   const { tasks, updateTaskStatus, selectTask, selectedTaskId } = useStore()
   const [draggedTask, setDraggedTask] = useState<string | null>(null)
 
+  const safeTasks = tasks || []
+
   const handleDragStart = (e: React.DragEvent, taskId: string) => {
     setDraggedTask(taskId)
     e.dataTransfer.effectAllowed = 'move'
@@ -36,14 +38,14 @@ export default function KanbanBoard() {
     selectTask(taskId)
   }
 
-  const selectedTask = tasks.find((t) => t.id === selectedTaskId)
+  const selectedTask = safeTasks.find((t) => t.id === selectedTaskId)
 
   return (
     <div className="flex gap-6">
       {/* Kanban Columns */}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {columns.map((column) => {
-          const columnTasks = tasks.filter((t) => t.status === column.id)
+          const columnTasks = safeTasks.filter((t) => t.status === column.id)
 
           return (
             <div

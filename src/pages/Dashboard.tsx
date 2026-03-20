@@ -10,15 +10,20 @@ export default function Dashboard() {
   const navigate = useNavigate()
   const { agents, tasks, logs, supervisors } = useStore()
 
-  const activeAgents = agents.filter((a) => a.status === 'active').length
-  const totalTasks = tasks.length
-  const completedTasks = tasks.filter((t) => t.status === 'done').length
-  const avgSuccessRate = agents.length > 0
-    ? (agents.reduce((sum, a) => sum + a.successRate, 0) / agents.length).toFixed(1)
+  const safeAgents = agents || []
+  const safeTasks = tasks || []
+  const safeLogs = logs || []
+  const safeSupervisors = supervisors || []
+
+  const activeAgents = safeAgents.filter((a) => a.status === 'active').length
+  const totalTasks = safeTasks.length
+  const completedTasks = safeTasks.filter((t) => t.status === 'done').length
+  const avgSuccessRate = safeAgents.length > 0
+    ? (safeAgents.reduce((sum, a) => sum + a.successRate, 0) / safeAgents.length).toFixed(1)
     : '0.0'
 
-  const recentTasks = tasks.slice(0, 4)
-  const recentLogs = logs.slice(0, 6)
+  const recentTasks = safeTasks.slice(0, 4)
+  const recentLogs = safeLogs.slice(0, 6)
 
   return (
     <div className="p-8">
@@ -34,8 +39,8 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard
           label="Active Agents"
-          value={`${activeAgents}/${agents.length}`}
-          subtext={`+${supervisors.length} supervisors`}
+          value={`${activeAgents}/${safeAgents.length}`}
+          subtext={`+${safeSupervisors.length} supervisors`}
         />
         <StatCard
           label="Tasks"
@@ -91,7 +96,7 @@ export default function Dashboard() {
               </button>
             </div>
             <div className="space-y-3">
-              {agents.slice(0, 5).map((agent) => (
+              {safeAgents.slice(0, 5).map((agent) => (
                 <AgentCard
                   key={agent.id}
                   agent={agent}
@@ -101,11 +106,11 @@ export default function Dashboard() {
             </div>
 
             {/* Supervisors */}
-            {supervisors.length > 0 && (
+            {safeSupervisors.length > 0 && (
               <div className="mt-6 pt-6 border-t border-white/10">
                 <h3 className="text-xs font-medium text-slate-400 mb-4">Supervisors</h3>
                 <div className="space-y-3">
-                  {supervisors.map((supervisor) => (
+                  {safeSupervisors.map((supervisor) => (
                     <AgentCard
                       key={supervisor.id}
                       agent={supervisor}

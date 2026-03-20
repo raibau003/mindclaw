@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 import AgentCard from '../components/agents/AgentCard'
@@ -6,12 +6,16 @@ import VirtualOffice from '../components/views/VirtualOffice'
 import VirtualOffice3D from '../components/views/VirtualOffice3D'
 import KanbanBoard from '../components/views/KanbanBoard'
 import AgentDetail from '../components/views/AgentDetail'
+import ErrorBoundary from '../components/ErrorBoundary'
 
 type ViewMode = 'list' | 'office' | 'office3d' | 'kanban' | 'detail'
 
 export default function Agents() {
   const [searchParams, setSearchParams] = useSearchParams()
   const { agents, supervisors, selectedAgentId, selectAgent } = useStore()
+
+  const safeAgents = agents || []
+  const safeSupervisors = supervisors || []
 
   // Determine view mode from URL params
   const viewParam = searchParams.get('view') as ViewMode | null
@@ -89,10 +93,10 @@ export default function Agents() {
           {/* Worker Agents */}
           <div className="glass-card border border-white/10 rounded-lg p-6">
             <h2 className="text-sm font-semibold text-white mb-6">
-              Worker Agents <span className="text-slate-400 font-normal">({agents.length})</span>
+              Worker Agents <span className="text-slate-400 font-normal">({safeAgents.length})</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {agents.map((agent) => (
+              {safeAgents.map((agent) => (
                 <AgentCard
                   key={agent.id}
                   agent={agent}
@@ -105,10 +109,10 @@ export default function Agents() {
           {/* Supervisor Agents */}
           <div className="glass-card border border-white/10 rounded-lg p-6">
             <h2 className="text-sm font-semibold text-white mb-6">
-              Supervisor Agents <span className="text-slate-400 font-normal">({supervisors.length})</span>
+              Supervisor Agents <span className="text-slate-400 font-normal">({safeSupervisors.length})</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {supervisors.map((supervisor) => (
+              {safeSupervisors.map((supervisor) => (
                 <AgentCard
                   key={supervisor.id}
                   agent={supervisor}
@@ -120,18 +124,59 @@ export default function Agents() {
         </div>
       )}
 
-      {viewMode === 'office' && <VirtualOffice onAgentClick={handleAgentClick} />}
-      {viewMode === 'office3d' && <VirtualOffice3D />}
-      {viewMode === 'kanban' && <KanbanBoard />}
+      {viewMode === 'office' && (
+        <ErrorBoundary>
+          <VirtualOffice onAgentClick={handleAgentClick} />
+        </ErrorBoundary>
+      )}
+      {viewMode === 'office3d' && (
+        <ErrorBoundary
+          fallback={
+            <div className="glass-card border border-white/10 rounded-lg p-8 text-center">
+              <div className="text-4xl mb-4">⚠️</div>
+              <h3 className="text-lg font-semibold text-white glow-text mb-2">
+                3D View Unavailable
+              </h3>
+              <p className="text-sm text-slate-300 mb-4">
+                Could not load the 3D environment. Please try the 2D office view instead.
+              </p>
+              <button
+                onClick={() => handleViewChange('office')}
+                className="btn-primary px-6 py-2 rounded-md text-white text-sm font-medium"
+              >
+                Switch to 2D View
+              </button>
+            </div>
+          }
+        >
+          <Suspense
+            fallback={
+              <div className="glass-card border border-white/10 rounded-lg p-8 text-center">
+                <div className="text-4xl mb-4 animate-pulse">🌐</div>
+                <p className="text-sm text-slate-300">Loading 3D Environment...</p>
+              </div>
+            }
+          >
+            <VirtualOffice3D />
+          </Suspense>
+        </ErrorBoundary>
+      )}
+      {viewMode === 'kanban' && (
+        <ErrorBoundary>
+          <KanbanBoard />
+        </ErrorBoundary>
+      )}
       {viewMode === 'detail' && selectedAgentId && (
-        <AgentDetail
-          agentId={selectedAgentId}
-          onClose={() => {
-            selectAgent(null)
-            setSearchParams({})
-            setViewMode('list')
-          }}
-        />
+        <ErrorBoundary>
+          <AgentDetail
+            agentId={selectedAgentId}
+            onClose={() => {
+              selectAgent(null)
+              setSearchParams({})
+              setViewMode('list')
+            }}
+          />
+        </ErrorBoundary>
       )}
     </div>
   )
