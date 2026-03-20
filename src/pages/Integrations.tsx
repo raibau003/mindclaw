@@ -1,13 +1,28 @@
 export default function Integrations() {
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold mb-2">Integrations</h1>
-      <p className="text-gray-400">Connect external services and APIs</p>
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-white mb-2">Integrations</h1>
+        <p className="text-zinc-400">Connect external services and APIs</p>
+      </div>
 
-      <div className="mt-8 bg-[#0d1321] border border-gray-800 rounded-xl p-8 text-center">
-        <div className="text-6xl mb-4">🔌</div>
-        <p className="text-gray-400">Integrations coming soon...</p>
+      <div className="glass-card rounded-xl p-12 text-center">
+        <div className="w-16 h-16 rounded-2xl bg-white/[0.05] flex items-center justify-center mx-auto mb-6">
+          <IntegrationsIcon />
+        </div>
+        <h3 className="text-lg font-semibold text-white mb-2">External Integrations</h3>
+        <p className="text-zinc-500 max-w-md mx-auto">
+          Connect your favorite tools and services including Slack, GitHub, Jira, and more coming soon.
+        </p>
       </div>
     </div>
+  )
+}
+
+function IntegrationsIcon() {
+  return (
+    <svg className="w-8 h-8 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+    </svg>
   )
 }

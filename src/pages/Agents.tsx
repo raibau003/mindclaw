@@ -43,51 +43,40 @@ export default function Agents() {
     setViewMode('detail')
   }
 
+  const tabs = [
+    { id: 'list', label: 'List View', icon: <ListIcon /> },
+    { id: 'office', label: 'Virtual Office', icon: <BuildingIcon /> },
+    { id: 'kanban', label: 'Kanban Board', icon: <KanbanIcon /> },
+  ]
+
   return (
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Agents</h1>
-        <p className="text-gray-400">Manage and monitor your AI agent workforce</p>
+        <h1 className="text-4xl font-bold text-white mb-2">Agents</h1>
+        <p className="text-zinc-400">Manage and monitor your AI agent workforce</p>
       </div>
 
       {/* View Tabs */}
-      <div className="flex items-center gap-2 mb-6 border-b border-gray-800">
-        <button
-          onClick={() => handleViewChange('list')}
-          className={`px-4 py-2 transition-colors ${
-            viewMode === 'list'
-              ? 'text-blue-400 border-b-2 border-blue-400'
-              : 'text-gray-400 hover:text-white'
-          }`}
-        >
-          📋 List View
-        </button>
-        <button
-          onClick={() => handleViewChange('office')}
-          className={`px-4 py-2 transition-colors ${
-            viewMode === 'office'
-              ? 'text-blue-400 border-b-2 border-blue-400'
-              : 'text-gray-400 hover:text-white'
-          }`}
-        >
-          🏢 Virtual Office
-        </button>
-        <button
-          onClick={() => handleViewChange('kanban')}
-          className={`px-4 py-2 transition-colors ${
-            viewMode === 'kanban'
-              ? 'text-blue-400 border-b-2 border-blue-400'
-              : 'text-gray-400 hover:text-white'
-          }`}
-        >
-          📊 Kanban Board
-        </button>
-        {viewMode === 'detail' && selectedAgentId && (
+      <div className="flex items-center gap-1 mb-8 border-b border-white/[0.08]">
+        {tabs.map((tab) => (
           <button
-            className="px-4 py-2 text-blue-400 border-b-2 border-blue-400"
+            key={tab.id}
+            onClick={() => handleViewChange(tab.id as ViewMode)}
+            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors border-b-2 -mb-px ${
+              viewMode === tab.id
+                ? 'text-white border-blue-500'
+                : 'text-zinc-400 border-transparent hover:text-white hover:border-white/20'
+            }`}
           >
-            🔍 Agent Detail
+            {tab.icon}
+            {tab.label}
+          </button>
+        ))}
+        {viewMode === 'detail' && selectedAgentId && (
+          <button className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-white border-b-2 border-blue-500 -mb-px">
+            <DetailIcon />
+            Agent Detail
           </button>
         )}
       </div>
@@ -96,8 +85,10 @@ export default function Agents() {
       {viewMode === 'list' && (
         <div className="space-y-6">
           {/* Worker Agents */}
-          <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-6">
-            <h2 className="text-xl font-bold mb-4">Worker Agents ({agents.length})</h2>
+          <div className="glass-card rounded-xl p-6">
+            <h2 className="text-lg font-semibold text-white mb-6">
+              Worker Agents <span className="text-zinc-500 font-normal">({agents.length})</span>
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {agents.map((agent) => (
                 <AgentCard
@@ -110,8 +101,10 @@ export default function Agents() {
           </div>
 
           {/* Supervisor Agents */}
-          <div className="bg-[#0d1321] border border-gray-800 rounded-xl p-6">
-            <h2 className="text-xl font-bold mb-4">Supervisor Agents ({supervisors.length})</h2>
+          <div className="glass-card rounded-xl p-6">
+            <h2 className="text-lg font-semibold text-white mb-6">
+              Supervisor Agents <span className="text-zinc-500 font-normal">({supervisors.length})</span>
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {supervisors.map((supervisor) => (
                 <AgentCard
@@ -138,5 +131,38 @@ export default function Agents() {
         />
       )}
     </div>
+  )
+}
+
+// Icon Components
+function ListIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+    </svg>
+  )
+}
+
+function BuildingIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+    </svg>
+  )
+}
+
+function KanbanIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z" />
+    </svg>
+  )
+}
+
+function DetailIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+    </svg>
   )
 }

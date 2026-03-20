@@ -8,21 +8,29 @@ interface AgentCardProps {
 }
 
 export default function AgentCard({ agent, onClick, onDragStart, draggable = false }: AgentCardProps) {
-  const statusColors = {
-    active: 'bg-green-400',
-    idle: 'bg-yellow-400',
-    error: 'bg-red-400',
+  const statusConfig = {
+    active: {
+      dot: 'bg-emerald-400',
+      label: 'Active',
+      pulse: true,
+    },
+    idle: {
+      dot: 'bg-amber-400',
+      label: 'Idle',
+      pulse: false,
+    },
+    error: {
+      dot: 'bg-red-400',
+      label: 'Error',
+      pulse: false,
+    },
   }
 
-  const statusLabels = {
-    active: 'Active',
-    idle: 'Idle',
-    error: 'Error',
-  }
+  const status = statusConfig[agent.status]
 
   return (
     <div
-      className={`p-4 bg-[#0d1321] rounded-lg border border-gray-800 hover:border-gray-700 transition-all ${
+      className={`p-4 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.1] transition-all duration-200 ${
         onClick ? 'cursor-pointer' : ''
       } ${draggable ? 'cursor-move' : ''}`}
       onClick={onClick}
@@ -30,23 +38,23 @@ export default function AgentCard({ agent, onClick, onDragStart, draggable = fal
       draggable={draggable}
       data-agent-id={agent.id}
     >
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="text-3xl">{agent.emoji}</div>
+          <div className="text-2xl">{agent.emoji}</div>
           <div>
-            <div className="font-semibold text-sm">{agent.name}</div>
-            <div className="text-xs text-gray-400">{agent.type}</div>
+            <p className="font-medium text-sm text-white">{agent.name}</p>
+            <p className="text-xs text-zinc-500">{agent.type}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${statusColors[agent.status]} ${agent.status === 'active' ? 'animate-pulse' : ''}`} />
-          <span className="text-xs text-gray-400">{statusLabels[agent.status]}</span>
+          <div className={`w-2 h-2 rounded-full ${status.dot} ${status.pulse ? 'animate-pulse' : ''}`} />
+          <span className="text-xs text-zinc-500">{status.label}</span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-gray-400 mt-2">
-        <div>{agent.tasks} tasks</div>
-        <div>{agent.successRate}% success</div>
+      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/[0.06]">
+        <span className="text-xs text-zinc-500">{agent.tasks} tasks</span>
+        <span className="text-xs text-zinc-400">{agent.successRate}% success</span>
       </div>
     </div>
   )
