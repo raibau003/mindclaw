@@ -1,0 +1,97 @@
+{
+  "overview": [
+    {
+      "label": "Agentes Activos",
+      "value": "1/4",
+      "change": 100,
+      "trend": "up",
+      "icon": "cpu"
+    },
+    {
+      "label": "Skills Instalados",
+      "value": "8",
+      "change": 14.3,
+      "trend": "up",
+      "icon": "package"
+    },
+    {
+      "label": "Usuarios Activos",
+      "value": "127",
+      "change": 8.5,
+      "trend": "up",
+      "icon": "users"
+    },
+    {
+      "label": "Costo Mensual",
+      "value": "€12,450",
+      "change": -5.2,
+      "trend": "down",
+      "icon": "euro"
+    }
+  ],
+  "usageData": [
+    { "date": "2026-03-12", "skillsExecuted": 345, "cost": 1850, "activeUsers": 98 },
+    { "date": "2026-03-13", "skillsExecuted": 412, "cost": 1920, "activeUsers": 105 },
+    { "date": "2026-03-14", "skillsExecuted": 389, "cost": 1880, "activeUsers": 102 },
+    { "date": "2026-03-15", "skillsExecuted": 456, "cost": 2100, "activeUsers": 112 },
+    { "date": "2026-03-16", "skillsExecuted": 398, "cost": 1950, "activeUsers": 108 },
+    { "date": "2026-03-17", "skillsExecuted": 502, "cost": 2250, "activeUsers": 118 },
+    { "date": "2026-03-18", "skillsExecuted": 478, "cost": 2180, "activeUsers": 115 },
+    { "date": "2026-03-19", "skillsExecuted": 534, "cost": 2320, "activeUsers": 127 }
+  ],
+  "costBreakdown": [
+    { "name": "Data Engineer Agent", "value": 6500 },
+    { "name": "Skills Execution", "value": 3200 },
+    { "name": "Storage & Compute", "value": 1800 },
+    { "name": "API Calls", "value": 950 }
+  ],
+  "skillsPopularity": [
+    { "name": "NL2SQL", "executions": 2456 },
+    { "name": "SAP Connector", "executions": 1890 },
+    { "name": "Dashboard Builder", "executions": 1654 },
+    { "name": "PII Redactor", "executions": 1234 },
+    { "name": "Data Cleaner", "executions": 987 }
+  ],
+  "recentAlerts": [
+    {
+      "id": "alert-001",
+      "title": "Sincronización SAP completada",
+      "description": "12,456 registros procesados exitosamente",
+      "timestamp": "2026-03-19T22:45:00Z",
+      "type": "success",
+      "agentId": "data-engineer"
+    },
+    {
+      "id": "alert-002",
+      "title": "Anomalía detectada en ventas",
+      "description": "Venta atípica de €45,000 requiere revisión",
+      "timestamp": "2026-03-19T21:30:00Z",
+      "type": "warning",
+      "agentId": "data-engineer"
+    },
+    {
+      "id": "alert-003",
+      "title": "Error en API CRM",
+      "description": "Timeout en conexión con CRM externo",
+      "timestamp": "2026-03-19T20:15:00Z",
+      "type": "error",
+      "agentId": "data-engineer"
+    },
+    {
+      "id": "alert-004",
+      "title": "Nuevo skill disponible",
+      "description": "Advanced Analytics Engine v2.0 en el marketplace",
+      "timestamp": "2026-03-19T18:00:00Z",
+      "type": "info",
+      "agentId": null
+    },
+    {
+      "id": "alert-005",
+      "title": "Límite de ejecuciones alcanzado",
+      "description": "90% del límite mensual de executions. Considera upgrade.",
+      "timestamp": "2026-03-19T16:45:00Z",
+      "type": "warning",
+      "agentId": null
+    }
+  ]
+}

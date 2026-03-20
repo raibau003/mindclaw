@@ -1,0 +1,274 @@
+[
+  {
+    "id": "data-engineer",
+    "name": "Data Engineer Agent",
+    "description": "Conecta, limpia y modela datos de cualquier fuente empresarial",
+    "status": "live",
+    "quarter": "Q1 2026",
+    "capabilities": [
+      "Conexión a SAP, ERP, bases de datos, APIs",
+      "Limpieza y validación automática de datos",
+      "Modelado estrella y copo de nieve",
+      "Sincronización en tiempo real (CDC)",
+      "Catálogo de datos con búsqueda NL"
+    ],
+    "skills": ["skill-sap-connector", "skill-db-connector", "skill-data-cleaner", "skill-pipeline-builder"],
+    "icon": "database",
+    "color": "#1e40af",
+    "autoConfig": true,
+    "metrics": {
+      "successRate": 98.5,
+      "avgExecutionTime": 1250,
+      "totalExecutions": 12456,
+      "lastExecution": "2026-03-19T22:30:15Z"
+    },
+    "semanticLayer": {
+      "id": "sl-data-eng",
+      "name": "Capa Semántica - Data Engineering",
+      "description": "Define cómo se interpretan los datos de ventas y operaciones",
+      "entities": [
+        {
+          "id": "entity-ventas",
+          "name": "ventas",
+          "displayName": "Ventas",
+          "description": "Transacciones de venta",
+          "sourceTable": "fact_ventas",
+          "fields": [
+            {
+              "id": "field-monto",
+              "name": "monto_venta",
+              "displayName": "Monto de Venta",
+              "type": "currency",
+              "description": "Total de la venta en CLP",
+              "synonyms": ["venta", "total", "monto", "facturación"],
+              "aggregation": "sum"
+            },
+            {
+              "id": "field-fecha",
+              "name": "fecha_venta",
+              "displayName": "Fecha de Venta",
+              "type": "date",
+              "description": "Fecha en que se realizó la venta",
+              "synonyms": ["fecha", "día", "cuando"]
+            }
+          ]
+        },
+        {
+          "id": "entity-productos",
+          "name": "productos",
+          "displayName": "Productos",
+          "description": "Catálogo de productos",
+          "sourceTable": "dim_productos",
+          "fields": [
+            {
+              "id": "field-producto-nombre",
+              "name": "nombre_producto",
+              "displayName": "Nombre del Producto",
+              "type": "text",
+              "description": "Nombre comercial del producto",
+              "synonyms": ["producto", "artículo", "SKU"]
+            },
+            {
+              "id": "field-categoria",
+              "name": "categoria",
+              "displayName": "Categoría",
+              "type": "text",
+              "description": "Categoría del producto",
+              "synonyms": ["familia", "tipo", "clasificación"]
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "from": "entity-ventas",
+          "to": "entity-productos",
+          "type": "many-to-one",
+          "foreignKey": "producto_id"
+        }
+      ]
+    },
+    "channels": [
+      {
+        "id": "channel-teams",
+        "type": "teams",
+        "enabled": true,
+        "settings": {
+          "welcomeMessage": "¡Hola! Soy tu Agente de Data Engineering. Puedo conectarme a cualquier fuente de datos.",
+          "fallbackMessage": "No entendí tu consulta. Intenta preguntar por conectores disponibles o estado de sincronización.",
+          "maxSessionDuration": 1800
+        }
+      },
+      {
+        "id": "channel-web",
+        "type": "web",
+        "enabled": true,
+        "settings": {
+          "welcomeMessage": "Bienvenido al Mission Control de MindClaw",
+          "maxSessionDuration": 3600
+        }
+      }
+    ],
+    "permissions": [
+      {
+        "id": "perm-1",
+        "userId": "user-001",
+        "userName": "Javier Correa",
+        "role": "admin",
+        "dataAccess": {
+          "entities": ["entity-ventas", "entity-productos"],
+          "filters": []
+        }
+      },
+      {
+        "id": "perm-2",
+        "userId": "user-002",
+        "userName": "Analista Ventas",
+        "role": "analyst",
+        "dataAccess": {
+          "entities": ["entity-ventas"],
+          "filters": [
+            {
+              "field": "region",
+              "operator": "equals",
+              "value": "Chile"
+            }
+          ]
+        }
+      }
+    ],
+    "knowledgeBase": {
+      "id": "kb-data-eng",
+      "name": "Knowledge Base - Data Engineering",
+      "enabled": true,
+      "documents": [
+        {
+          "id": "doc-1",
+          "name": "Manual de Conexión SAP B1",
+          "type": "pdf",
+          "url": "https://example.com/sap-manual.pdf",
+          "uploadedAt": "2026-03-15T10:00:00Z",
+          "status": "ready"
+        },
+        {
+          "id": "doc-2",
+          "name": "Políticas de Calidad de Datos",
+          "type": "docx",
+          "uploadedAt": "2026-03-10T14:30:00Z",
+          "status": "ready"
+        }
+      ]
+    },
+    "alerts": [
+      {
+        "id": "alert-1",
+        "name": "Fallo en Sincronización SAP",
+        "description": "Alerta cuando la sincronización con SAP falla más de 3 veces",
+        "enabled": true,
+        "condition": {
+          "metric": "sync_failures",
+          "operator": "greater_than",
+          "threshold": 3
+        },
+        "frequency": "realtime",
+        "channels": ["teams", "email"],
+        "recipients": ["javier@evolveds.ai", "ops@evolveds.ai"]
+      }
+    ],
+    "customMetrics": [
+      {
+        "id": "metric-1",
+        "name": "total_ventas_mes",
+        "displayName": "Ventas Totales del Mes",
+        "description": "Suma de todas las ventas del mes actual",
+        "formula": "SUM(monto_venta) WHERE fecha_venta >= first_day_of_month()",
+        "unit": "CLP",
+        "format": "currency"
+      }
+    ],
+    "queryExamples": [
+      {
+        "id": "qe-1",
+        "query": "¿Cuáles fueron las ventas totales del mes pasado?",
+        "category": "sales",
+        "expectedResponse": "Las ventas totales de febrero fueron $125,450,000 CLP, un 12% más que enero"
+      },
+      {
+        "id": "qe-2",
+        "query": "Muéstrame los productos más vendidos esta semana",
+        "category": "sales",
+        "expectedResponse": "Los top 3 productos fueron: 1) Vino Premium ($45M), 2) Vino Reserva ($32M), 3) Espumante ($28M)"
+      }
+    ]
+  },
+  {
+    "id": "automation",
+    "name": "Automation Agent",
+    "description": "Automatiza procesos end-to-end con RPA y orquestación de APIs",
+    "status": "coming-soon",
+    "quarter": "Q2 2026",
+    "capabilities": [
+      "Web scraping inteligente (Vision + adaptive)",
+      "RPA controlado por LLM",
+      "Orquestación de N APIs en secuencia",
+      "Generador de workflows N8N/Make desde NL"
+    ],
+    "skills": ["skill-web-scraper", "skill-computer-use", "skill-sap-rpa", "skill-n8n-generator"],
+    "icon": "cpu",
+    "color": "#10b981",
+    "autoConfig": true,
+    "metrics": {
+      "successRate": 0,
+      "avgExecutionTime": 0,
+      "totalExecutions": 0,
+      "lastExecution": ""
+    }
+  },
+  {
+    "id": "data-science",
+    "name": "Data Science Agent",
+    "description": "Predicciones, segmentación y análisis avanzado con ML",
+    "status": "coming-soon",
+    "quarter": "Q2 2026",
+    "capabilities": [
+      "Forecasting de ventas y demanda",
+      "Predicción de churn de clientes",
+      "Segmentación RFM automática",
+      "Sistemas de recomendación",
+      "Detección de anomalías de negocio"
+    ],
+    "skills": ["skill-sales-forecaster", "skill-churn-predictor", "skill-rfm-segmentation"],
+    "icon": "brain",
+    "color": "#8b5cf6",
+    "autoConfig": true,
+    "metrics": {
+      "successRate": 0,
+      "avgExecutionTime": 0,
+      "totalExecutions": 0,
+      "lastExecution": ""
+    }
+  },
+  {
+    "id": "vision",
+    "name": "Vision Agent",
+    "description": "Análisis visual con IA para seguridad y calidad industrial",
+    "status": "coming-soon",
+    "quarter": "Q3 2026",
+    "capabilities": [
+      "Detección de EPP (cascos, chalecos, guantes)",
+      "Análisis de ergonomía y postura laboral",
+      "Inspección visual de equipos industriales",
+      "Conteo automático de inventario retail"
+    ],
+    "skills": ["skill-vision-ppe", "skill-vision-retail", "skill-vision-inspection"],
+    "icon": "eye",
+    "color": "#f59e0b",
+    "autoConfig": true,
+    "metrics": {
+      "successRate": 0,
+      "avgExecutionTime": 0,
+      "totalExecutions": 0,
+      "lastExecution": ""
+    }
+  }
+]

@@ -1,0 +1,349 @@
+[
+  {
+    "id": "skill-sap-connector",
+    "name": "SAP B1 Connector",
+    "description": "Conecta directamente a SAP Business One para extraer datos de ventas, inventario y finanzas",
+    "longDescription": "Integración completa con SAP B1 mediante RFC o API REST. Soporta extracción incremental, CDC y sincronización en tiempo real.",
+    "category": "datos",
+    "price": 5000,
+    "currency": "EUR",
+    "rating": 4.8,
+    "installCount": 142,
+    "icon": "plug",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-engineer"],
+    "version": "2.1.0",
+    "versionHistory": [
+      {
+        "version": "2.1.0",
+        "releaseDate": "2026-03-15",
+        "changelog": ["Soporte para SAP B1 10.0", "Mejoras en performance de CDC", "Fix en extracción de finanzas"]
+      },
+      {
+        "version": "2.0.0",
+        "releaseDate": "2026-02-01",
+        "changelog": ["Nueva arquitectura de conectores", "Soporte para múltiples instancias SAP"]
+      }
+    ],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": true
+  },
+  {
+    "id": "skill-db-connector",
+    "name": "Universal Database Connector",
+    "description": "Conecta a cualquier base SQL o NoSQL (PostgreSQL, MySQL, MongoDB, etc.)",
+    "longDescription": "Conector universal que soporta 15+ tipos de bases de datos. Auto-descubrimiento de esquemas, query optimization, y connection pooling.",
+    "category": "datos",
+    "price": 3000,
+    "currency": "EUR",
+    "rating": 4.9,
+    "installCount": 287,
+    "icon": "database",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-engineer"],
+    "version": "3.0.1",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": true
+  },
+  {
+    "id": "skill-data-cleaner",
+    "name": "Data Quality & Cleaner",
+    "description": "Limpieza automática: deduplicación, outliers, validación de formatos",
+    "longDescription": "Suite completa de limpieza de datos con ML. Detecta y corrige automáticamente duplicados, valores atípicos, formatos inconsistentes y datos faltantes.",
+    "category": "datos",
+    "price": 2500,
+    "currency": "EUR",
+    "rating": 4.7,
+    "installCount": 198,
+    "icon": "sparkles",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-engineer"],
+    "version": "1.5.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": true
+  },
+  {
+    "id": "skill-pipeline-builder",
+    "name": "Pipeline Auto-builder",
+    "description": "Genera pipelines de datos automáticamente desde lenguaje natural",
+    "longDescription": "Describe tu pipeline en lenguaje natural y el skill genera el código completo (dbt, Airflow, Prefect). Incluye testing y documentación automática.",
+    "category": "datos",
+    "price": 4500,
+    "currency": "EUR",
+    "rating": 4.6,
+    "installCount": 156,
+    "icon": "workflow",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-engineer"],
+    "version": "1.2.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": true
+  },
+  {
+    "id": "skill-dashboard-builder",
+    "name": "Dashboard Builder AI",
+    "description": "Crea dashboards completos desde una descripción en lenguaje natural",
+    "longDescription": "Genera dashboards interactivos con Plotly/Recharts desde descripciones simples. Auto-selecciona las mejores visualizaciones según los datos.",
+    "category": "analytics",
+    "price": 3500,
+    "currency": "EUR",
+    "rating": 4.8,
+    "installCount": 223,
+    "icon": "bar-chart",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-engineer"],
+    "version": "2.0.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": true
+  },
+  {
+    "id": "skill-nl2sql",
+    "name": "Natural Language to SQL",
+    "description": "Convierte preguntas en lenguaje natural a consultas SQL optimizadas",
+    "longDescription": "Motor de NL2SQL con fine-tuning en tu esquema de datos. Genera SQL optimizado, explica la query generada y valida resultados.",
+    "category": "analytics",
+    "price": 4000,
+    "currency": "EUR",
+    "rating": 4.9,
+    "installCount": 312,
+    "icon": "message-square",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-engineer"],
+    "version": "3.1.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": false
+  },
+  {
+    "id": "skill-sales-forecaster",
+    "name": "Sales Forecasting Engine",
+    "description": "Predicción de ventas con modelos de ML y series temporales",
+    "longDescription": "Combina Prophet, XGBoost y LSTM para predicciones precisas. Incluye detección de estacionalidad, tendencias y eventos especiales.",
+    "category": "prediccion",
+    "price": 6000,
+    "currency": "EUR",
+    "rating": 4.7,
+    "installCount": 89,
+    "icon": "trending-up",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-science"],
+    "version": "1.0.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": false
+  },
+  {
+    "id": "skill-churn-predictor",
+    "name": "Customer Churn Predictor",
+    "description": "Predice qué clientes están en riesgo de abandonar el servicio",
+    "longDescription": "Modelo de ML que analiza comportamiento, engagement y transacciones para predecir churn. Incluye score de riesgo y recomendaciones de retención.",
+    "category": "prediccion",
+    "price": 5500,
+    "currency": "EUR",
+    "rating": 4.8,
+    "installCount": 67,
+    "icon": "user-x",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-science"],
+    "version": "1.1.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": false
+  },
+  {
+    "id": "skill-rfm-segmentation",
+    "name": "RFM Segmentation",
+    "description": "Segmenta clientes automáticamente usando Recency, Frequency, Monetary",
+    "longDescription": "Análisis RFM automatizado con clustering ML. Identifica segmentos de alto valor, en riesgo, y nuevos clientes.",
+    "category": "prediccion",
+    "price": 3000,
+    "currency": "EUR",
+    "rating": 4.6,
+    "installCount": 112,
+    "icon": "users",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-science"],
+    "version": "1.0.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": false
+  },
+  {
+    "id": "skill-web-scraper",
+    "name": "Intelligent Web Scraper",
+    "description": "Scraping adaptativo con visión por computadora y resistencia a anti-bot",
+    "longDescription": "Scraper que combina Scrapling + Vision para adaptarse a cambios en sitios web. Bypass automático de CAPTCHAs y anti-bot.",
+    "category": "automatizacion",
+    "price": 4500,
+    "currency": "EUR",
+    "rating": 4.8,
+    "installCount": 145,
+    "icon": "globe",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["automation"],
+    "version": "1.0.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": false
+  },
+  {
+    "id": "skill-n8n-generator",
+    "name": "N8N Workflow Generator",
+    "description": "Genera workflows de N8N/Make desde descripciones en lenguaje natural",
+    "longDescription": "Describe tu automatización y genera el workflow completo de N8N con todos los nodos configurados. Soporta 100+ integraciones.",
+    "category": "automatizacion",
+    "price": 5000,
+    "currency": "EUR",
+    "rating": 4.7,
+    "installCount": 78,
+    "icon": "git-branch",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["automation"],
+    "version": "1.0.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": false
+  },
+  {
+    "id": "skill-vision-ppe",
+    "name": "PPE Detection (Vision)",
+    "description": "Detecta equipos de protección personal en imágenes y videos",
+    "longDescription": "Modelo de visión entrenado para detectar cascos, chalecos, guantes, gafas y otros EPP en tiempo real.",
+    "category": "industria",
+    "price": 7000,
+    "currency": "EUR",
+    "rating": 4.9,
+    "installCount": 42,
+    "icon": "shield",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["vision"],
+    "version": "1.0.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": false
+  },
+  {
+    "id": "skill-pii-redactor",
+    "name": "PII Redaction Engine",
+    "description": "Detecta y enmascara automáticamente información personal sensible",
+    "longDescription": "Motor de PII que detecta RUT, emails, teléfonos, direcciones y los enmascara según políticas GDPR/HIPAA.",
+    "category": "governance",
+    "price": 6000,
+    "currency": "EUR",
+    "rating": 4.9,
+    "installCount": 156,
+    "icon": "eye-off",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-engineer"],
+    "version": "2.0.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": true
+  },
+  {
+    "id": "skill-audit-logger",
+    "name": "Audit & Compliance Logger",
+    "description": "Registra todas las operaciones y cambios para auditoría",
+    "longDescription": "Sistema de logging completo que captura quién, qué, cuándo y dónde. Inmutable, encriptado y con búsqueda full-text.",
+    "category": "governance",
+    "price": 4000,
+    "currency": "EUR",
+    "rating": 4.8,
+    "installCount": 189,
+    "icon": "file-text",
+    "developer": {
+      "name": "Evolve Team",
+      "verified": true
+    },
+    "compatibleAgents": ["data-engineer", "automation", "data-science", "vision"],
+    "version": "1.5.0",
+    "versionHistory": [],
+    "revenueShare": {
+      "developer": 70,
+      "platform": 30
+    },
+    "installed": true
+  }
+]

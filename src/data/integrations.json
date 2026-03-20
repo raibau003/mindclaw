@@ -1,0 +1,98 @@
+[
+  {
+    "id": "int-sap-b1",
+    "name": "SAP Business One",
+    "type": "sap",
+    "status": "connected",
+    "lastSync": "2026-03-19T22:45:00Z",
+    "syncFrequency": "hourly",
+    "credentials": {
+      "server": "sap.conchay toro.cl",
+      "database": "SBOPROD",
+      "username": "****"
+    },
+    "config": {
+      "useCDC": true,
+      "incremental": true,
+      "tables": ["OINV", "INV1", "OITM", "OCRD"]
+    },
+    "icon": "briefcase"
+  },
+  {
+    "id": "int-postgres",
+    "name": "PostgreSQL - Producción",
+    "type": "postgresql",
+    "status": "connected",
+    "lastSync": "2026-03-19T22:50:00Z",
+    "syncFrequency": "realtime",
+    "credentials": {
+      "host": "prod-db.evolveds.ai",
+      "port": "5432",
+      "database": "minddash",
+      "username": "****"
+    },
+    "config": {
+      "useCDC": true,
+      "incremental": true,
+      "tables": ["users", "conversations", "queries", "responses"]
+    },
+    "icon": "database"
+  },
+  {
+    "id": "int-bigquery",
+    "name": "Google BigQuery - Analytics",
+    "type": "bigquery",
+    "status": "connected",
+    "lastSync": "2026-03-19T22:30:00Z",
+    "syncFrequency": "daily",
+    "credentials": {
+      "projectId": "evolve-analytics",
+      "dataset": "concha_toro",
+      "serviceAccountKey": "****"
+    },
+    "config": {
+      "useCDC": false,
+      "incremental": true,
+      "tables": ["ventas", "productos", "clientes", "inventario"]
+    },
+    "icon": "cloud"
+  },
+  {
+    "id": "int-shopify",
+    "name": "Shopify - E-commerce",
+    "type": "shopify",
+    "status": "syncing",
+    "lastSync": "2026-03-19T22:55:00Z",
+    "syncFrequency": "hourly",
+    "credentials": {
+      "shopUrl": "evolveds.myshopify.com",
+      "apiKey": "****",
+      "apiSecret": "****"
+    },
+    "config": {
+      "useCDC": false,
+      "incremental": true,
+      "endpoint": "https://evolveds.myshopify.com/admin/api/2024-01"
+    },
+    "icon": "shopping-cart"
+  },
+  {
+    "id": "int-rest-api",
+    "name": "Custom REST API - CRM",
+    "type": "rest-api",
+    "status": "error",
+    "lastSync": "2026-03-19T20:15:00Z",
+    "syncFrequency": "hourly",
+    "credentials": {
+      "endpoint": "https://api.crm.example.com/v1",
+      "apiKey": "****",
+      "authType": "Bearer"
+    },
+    "config": {
+      "useCDC": false,
+      "incremental": false,
+      "endpoint": "https://api.crm.example.com/v1/leads"
+    },
+    "icon": "link"
+  }
+]
