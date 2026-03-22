@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindClaw Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            color: white;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧠 MindClaw - Test Page</h1>
+
+    <div class="card">
+        <h2>✅ Si ves esto, el servidor funciona</h2>
+        <p>El problema está en el código React/TypeScript.</p>
+    </div>
+
+    <div class="card">
+        <h2>📋 Debug Info</h2>
+        <p><strong>Fecha:</strong> <span id="date"></span></p>
+        <p><strong>Navegador:</strong> <span id="browser"></span></p>
+        <p><strong>Pantalla:</strong> <span id="screen"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('date').textContent = new Date().toLocaleString();
+        document.getElementById('browser').textContent = navigator.userAgent;
+        document.getElementById('screen').textContent = `${window.innerWidth}x${window.innerHeight}`;
+    </script>
+</body>
+</html>

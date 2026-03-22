@@ -24,10 +24,10 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div className="min-h-screen">
-      {/* Mobile Hamburger Button */}
+      {/* Mobile Hamburger Button - Only show on small screens */}
       <button
         onClick={() => setIsSidebarOpen(true)}
-        className="fixed top-4 left-4 z-40 md:hidden glass-card border border-white/10 rounded-lg p-2 text-white hover:bg-white/10 transition-all"
+        className="fixed top-4 left-4 z-40 lg:hidden glass-card border border-white/10 rounded-lg p-2 text-white hover:bg-white/10 transition-all"
         aria-label="Open menu"
       >
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -38,21 +38,21 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {/* Backdrop for mobile */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity"
           onClick={closeSidebar}
         />
       )}
 
-      {/* Sidebar with glassmorphism */}
+      {/* Sidebar - Always visible on desktop (>= 1024px) */}
       <aside
         className={`fixed left-0 top-0 h-screen w-64 glass-sidebar z-50 transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0`}
+        } lg:translate-x-0`}
       >
         {/* Close button for mobile */}
         <button
           onClick={closeSidebar}
-          className="absolute top-4 right-4 md:hidden text-white/70 hover:text-white transition-colors"
+          className="absolute top-4 right-4 lg:hidden text-white/70 hover:text-white transition-colors"
           aria-label="Close menu"
         >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -110,8 +110,8 @@ export default function MainLayout({ children }: MainLayoutProps) {
         </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="md:ml-64 min-h-screen p-4 md:p-6 pt-16 md:pt-6">
+      {/* Main Content - Margin left for sidebar on desktop */}
+      <main className="lg:ml-64 min-h-screen p-4 md:p-6 pt-16 lg:pt-6">
         {children}
       </main>
     </div>
