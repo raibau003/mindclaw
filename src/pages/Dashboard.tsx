@@ -198,36 +198,36 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="space-y-6 md:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2 glow-text">
+        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2 glow-text">
           Dashboard
         </h1>
-        <p className="text-slate-400">
+        <p className="text-sm md:text-base text-slate-400">
           La IA que reemplaza una consultoría entera de datos
         </p>
       </div>
 
       {/* Knowledge Graph Stats - Destacado */}
-      <div className="glass-card border border-blue-500/30 rounded-xl p-6 glow">
-        <div className="flex items-center justify-between mb-4">
+      <div className="glass-card border border-blue-500/30 rounded-xl p-4 md:p-6 glow">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
           <div>
-            <h2 className="text-lg font-semibold text-white mb-1 glow-text">
+            <h2 className="text-base md:text-lg font-semibold text-white mb-1 glow-text">
               🕸️ Knowledge Graph
             </h2>
-            <p className="text-sm text-slate-400">
+            <p className="text-xs md:text-sm text-slate-400">
               Memoria semántica del sistema - El cerebro de MindClaw
             </p>
           </div>
           <button
             onClick={() => navigate('/knowledge-graph')}
-            className="btn-primary text-sm px-4 py-2 rounded-lg text-white font-medium"
+            className="btn-primary text-xs md:text-sm px-3 md:px-4 py-2 rounded-lg text-white font-medium w-full sm:w-auto"
           >
             Ver Grafo
           </button>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           <StatCard label="Entities" value={knowledgeGraphStats.entities.toString()} />
           <StatCard label="Relations" value={knowledgeGraphStats.relations.toString()} />
           <StatCard label="Levels Depth" value={knowledgeGraphStats.depth.toString()} />
@@ -237,16 +237,16 @@ export default function Dashboard() {
 
       {/* Agentes Grid */}
       <div>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-white glow-text">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 md:mb-6">
+          <h2 className="text-lg md:text-xl font-semibold text-white glow-text">
             Agentes Especializados
           </h2>
-          <span className="text-sm text-slate-400">
+          <span className="text-xs md:text-sm text-slate-400">
             {liveMetrics.filter(a => a.status === 'ACTIVO').length} activos de {liveMetrics.length} agentes
           </span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {liveMetrics.map((agent) => (
             <div
               key={agent.id}
@@ -321,7 +321,7 @@ export default function Dashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
         <QuickActionCard
           icon="🛒"
           title="NemoClaw Marketplace"
@@ -348,9 +348,9 @@ export default function Dashboard() {
 // Stat Card Component
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="glass rounded-lg p-3 border border-white/10">
+    <div className="glass rounded-lg p-2 md:p-3 border border-white/10">
       <p className="text-xs text-slate-400 mb-1">{label}</p>
-      <p className="text-xl font-bold text-white glow-text">{value}</p>
+      <p className="text-lg md:text-xl font-bold text-white glow-text">{value}</p>
     </div>
   )
 }
@@ -370,10 +370,10 @@ function QuickActionCard({
   return (
     <button
       onClick={onClick}
-      className="glass-card border border-white/10 rounded-xl p-6 text-left group"
+      className="glass-card border border-white/10 rounded-xl p-4 md:p-6 text-left group"
     >
-      <div className="text-3xl mb-3">{icon}</div>
-      <h3 className="text-sm font-semibold text-white mb-2 glow-text group-hover:text-blue-400 transition-colors">
+      <div className="text-2xl md:text-3xl mb-2 md:mb-3">{icon}</div>
+      <h3 className="text-sm font-semibold text-white mb-1 md:mb-2 glow-text group-hover:text-blue-400 transition-colors">
         {title}
       </h3>
       <p className="text-xs text-slate-400">{description}</p>

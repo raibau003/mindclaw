@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 interface MainLayoutProps {
@@ -7,6 +8,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   const location = useLocation()
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const navItems = [
     { path: '/', label: 'Dashboard', icon: DashboardIcon },
@@ -18,10 +20,46 @@ export default function MainLayout({ children }: MainLayoutProps) {
     { path: '/settings', label: 'Settings', icon: SettingsIcon },
   ]
 
+  const closeSidebar = () => setIsSidebarOpen(false)
+
   return (
     <div className="min-h-screen">
+      {/* Mobile Hamburger Button */}
+      <button
+        onClick={() => setIsSidebarOpen(true)}
+        className="fixed top-4 left-4 z-40 md:hidden glass-card border border-white/10 rounded-lg p-2 text-white hover:bg-white/10 transition-all"
+        aria-label="Open menu"
+      >
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      {/* Backdrop for mobile */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity"
+          onClick={closeSidebar}
+        />
+      )}
+
       {/* Sidebar with glassmorphism */}
-      <aside className="fixed left-0 top-0 h-screen w-64 glass-sidebar z-50">
+      <aside
+        className={`fixed left-0 top-0 h-screen w-64 glass-sidebar z-50 transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0`}
+      >
+        {/* Close button for mobile */}
+        <button
+          onClick={closeSidebar}
+          className="absolute top-4 right-4 md:hidden text-white/70 hover:text-white transition-colors"
+          aria-label="Close menu"
+        >
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
         {/* Logo */}
         <div className="h-16 flex items-center px-6 border-b border-white/10">
           <div className="flex items-center gap-3">
@@ -44,6 +82,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={closeSidebar}
                 className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${
                   isActive
                     ? 'glass text-white glow'
@@ -72,7 +111,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="ml-64 min-h-screen p-6">
+      <main className="md:ml-64 min-h-screen p-4 md:p-6 pt-16 md:pt-6">
         {children}
       </main>
     </div>

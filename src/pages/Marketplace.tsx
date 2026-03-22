@@ -187,19 +187,19 @@ export default function Marketplace() {
   }
 
   return (
-    <div className="p-8 space-y-6">
+    <div className="space-y-4 md:space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2 glow-text">
+        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2 glow-text">
           🛒 NemoClaw Marketplace
         </h1>
-        <p className="text-slate-400">
+        <p className="text-sm md:text-base text-slate-400">
           Skills composables - CORE incluidos, PRO y ENTERPRISE con revenue share 70/30
         </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         <StatCard label="Total Skills" value={stats.totalSkills.toString()} />
         <StatCard label="Instalados" value={stats.installedSkills.toString()} />
         <StatCard label="Rating Promedio" value={`⭐ ${stats.avgRating}`} />
@@ -207,15 +207,15 @@ export default function Marketplace() {
       </div>
 
       {/* Filters */}
-      <div className="glass-card border border-white/10 rounded-xl p-4">
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-slate-400">Filtrar por tier:</span>
-          <div className="flex gap-2">
+      <div className="glass-card border border-white/10 rounded-xl p-3 md:p-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <span className="text-xs md:text-sm text-slate-400">Filtrar por tier:</span>
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
             {(['all', 'CORE', 'PRO', 'ENTERPRISE'] as const).map(tier => (
               <button
                 key={tier}
                 onClick={() => setFilter(tier)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
                   filter === tier
                     ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                     : 'bg-white/5 text-slate-400 border border-white/10 hover:bg-white/10'
@@ -229,7 +229,7 @@ export default function Marketplace() {
       </div>
 
       {/* Skills Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {filteredSkills.map(skill => (
           <div
             key={skill.id}
@@ -292,23 +292,23 @@ export default function Marketplace() {
       </div>
 
       {/* Revenue Share Info */}
-      <div className="glass-card border border-purple-500/30 rounded-xl p-6">
-        <div className="flex items-start gap-4">
-          <div className="text-3xl">💰</div>
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-2 glow-text">
+      <div className="glass-card border border-purple-500/30 rounded-xl p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row items-start gap-3 md:gap-4">
+          <div className="text-2xl md:text-3xl">💰</div>
+          <div className="flex-1">
+            <h3 className="text-base md:text-lg font-semibold text-white mb-2 glow-text">
               Modelo de Revenue Share
             </h3>
-            <p className="text-sm text-slate-300 mb-4">
+            <p className="text-xs md:text-sm text-slate-300 mb-3 md:mb-4">
               Los developers de skills reciben el 70% de los ingresos, la plataforma retiene el 30%. Crea tus propios skills y monetízalos en el marketplace.
             </p>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="glass rounded-lg p-4 border border-white/10">
-                <p className="text-2xl font-bold text-purple-400 mb-1">70%</p>
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
+              <div className="glass rounded-lg p-3 md:p-4 border border-white/10">
+                <p className="text-xl md:text-2xl font-bold text-purple-400 mb-1">70%</p>
                 <p className="text-xs text-slate-400">Para el Developer</p>
               </div>
-              <div className="glass rounded-lg p-4 border border-white/10">
-                <p className="text-2xl font-bold text-blue-400 mb-1">30%</p>
+              <div className="glass rounded-lg p-3 md:p-4 border border-white/10">
+                <p className="text-xl md:text-2xl font-bold text-blue-400 mb-1">30%</p>
                 <p className="text-xs text-slate-400">Para la Plataforma</p>
               </div>
             </div>
@@ -321,9 +321,9 @@ export default function Marketplace() {
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="glass-card border border-white/10 rounded-lg p-4">
+    <div className="glass-card border border-white/10 rounded-lg p-3 md:p-4">
       <p className="text-xs text-slate-400 mb-1">{label}</p>
-      <p className="text-2xl font-bold text-white glow-text">{value}</p>
+      <p className="text-lg md:text-2xl font-bold text-white glow-text">{value}</p>
     </div>
   )
 }

@@ -50,19 +50,19 @@ export default function Integrations() {
   }
 
   return (
-    <div className="p-8 space-y-6">
+    <div className="space-y-4 md:space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white mb-2 glow-text">
+        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2 glow-text">
           🔌 APIs & Conectores
         </h1>
-        <p className="text-slate-400">
+        <p className="text-sm md:text-base text-slate-400">
           15 integraciones pre-configuradas - Los agentes usan estas APIs automáticamente
         </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-3 md:gap-4">
         <StatCard label="Total APIs" value={stats.total.toString()} />
         <StatCard label="Habilitadas" value={stats.enabled.toString()} />
         <StatCard label="Categorías" value={stats.categories.toString()} />
@@ -73,8 +73,8 @@ export default function Integrations() {
         const categoryIntegrations = integrations.filter(i => i.category === category)
         return (
           <div key={category}>
-            <div className="mb-4">
-              <h2 className="text-lg font-semibold text-white glow-text">
+            <div className="mb-3 md:mb-4">
+              <h2 className="text-base md:text-lg font-semibold text-white glow-text">
                 {category}
               </h2>
               <p className="text-xs text-slate-400">
@@ -82,7 +82,7 @@ export default function Integrations() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
               {categoryIntegrations.map(integration => (
                 <div
                   key={integration.id}
@@ -134,17 +134,17 @@ export default function Integrations() {
       })}
 
       {/* Info Card */}
-      <div className="glass-card border border-blue-500/30 rounded-xl p-6">
-        <div className="flex items-start gap-4">
-          <div className="text-3xl">⚡</div>
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-2 glow-text">
+      <div className="glass-card border border-blue-500/30 rounded-xl p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row items-start gap-3 md:gap-4">
+          <div className="text-2xl md:text-3xl">⚡</div>
+          <div className="flex-1">
+            <h3 className="text-base md:text-lg font-semibold text-white mb-2 glow-text">
               Uso Automático por Agentes
             </h3>
-            <p className="text-sm text-slate-300 mb-3">
+            <p className="text-xs md:text-sm text-slate-300 mb-3">
               Los agentes de MindClaw usan estas APIs automáticamente según la tarea del usuario. No necesitas configurar nada manualmente.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
               <div className="flex items-start gap-2">
                 <span className="text-blue-400 text-xs mt-0.5">✓</span>
                 <p className="text-xs text-slate-300">
@@ -179,9 +179,9 @@ export default function Integrations() {
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="glass-card border border-white/10 rounded-lg p-4">
+    <div className="glass-card border border-white/10 rounded-lg p-3 md:p-4">
       <p className="text-xs text-slate-400 mb-1">{label}</p>
-      <p className="text-2xl font-bold text-white glow-text">{value}</p>
+      <p className="text-lg md:text-2xl font-bold text-white glow-text">{value}</p>
     </div>
   )
 }
