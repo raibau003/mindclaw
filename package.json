@@ -1,11 +1,11 @@
 {
   "name": "mindclaw",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "cp public/index.html dist/index.html && cp public/*.svg dist/ 2>/dev/null || true",
     "lint": "eslint .",
     "preview": "vite preview"
   },
