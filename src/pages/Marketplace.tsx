@@ -1,28 +1,329 @@
+import { useState } from 'react'
+
 export default function Marketplace() {
+  const [filter, setFilter] = useState<'all' | 'CORE' | 'PRO' | 'ENTERPRISE'>('all')
+
+  const skills = [
+    {
+      id: 'sap-connector',
+      name: 'skill-sap-connector',
+      icon: '🔌',
+      description: 'Conecta a SAP Business One para sincronización de datos en tiempo real',
+      tier: 'CORE',
+      price: 0,
+      priceLabel: 'Incluido en plan',
+      rating: 5.0,
+      installs: 1200,
+      installed: true,
+      category: 'Conectores'
+    },
+    {
+      id: 'data-cleaner',
+      name: 'skill-data-cleaner',
+      icon: '🧹',
+      description: 'Limpieza y validación automática de datos con reglas configurables',
+      tier: 'CORE',
+      price: 0,
+      priceLabel: 'Incluido en plan',
+      rating: 4.9,
+      installs: 980,
+      installed: true,
+      category: 'Data Quality'
+    },
+    {
+      id: 'churn-predictor',
+      name: 'skill-churn-predictor',
+      icon: '📊',
+      description: 'Predicción de churn de clientes usando ML avanzado con explicabilidad',
+      tier: 'PRO',
+      price: 2000,
+      priceLabel: '€2,000/mes',
+      rating: 4.8,
+      installs: 456,
+      installed: false,
+      category: 'Predicción'
+    },
+    {
+      id: 'web-scraper',
+      name: 'skill-web-scraper',
+      icon: '🌐',
+      description: 'Web scraping con Scrapling (HTTP2, TLS fingerprinting, anti-bot)',
+      tier: 'PRO',
+      price: 1500,
+      priceLabel: '€1,500/mes',
+      rating: 4.9,
+      installs: 789,
+      installed: false,
+      category: 'Automatización'
+    },
+    {
+      id: 'nl2sql',
+      name: 'skill-nl2sql',
+      icon: '💬',
+      description: 'Natural Language to SQL con soporte multi-database (PostgreSQL, MySQL, BigQuery)',
+      tier: 'PRO',
+      price: 1800,
+      priceLabel: '€1,800/mes',
+      rating: 4.7,
+      installs: 654,
+      installed: false,
+      category: 'Analytics'
+    },
+    {
+      id: 'pii-redactor',
+      name: 'skill-pii-redactor',
+      icon: '🔒',
+      description: 'Redacción automática de PII con compliance GDPR/SOC2 certificado',
+      tier: 'ENTERPRISE',
+      price: 5000,
+      priceLabel: '€5,000/mes',
+      rating: 5.0,
+      installs: 234,
+      installed: false,
+      category: 'Governance'
+    },
+    {
+      id: 'mapon-gps',
+      name: 'skill-mapon-gps',
+      icon: '🚛',
+      description: 'Integración con Mapon GPS para tracking de flotas en tiempo real',
+      tier: 'PRO',
+      price: 1200,
+      priceLabel: '€1,200/mes',
+      rating: 4.6,
+      installs: 345,
+      installed: false,
+      category: 'Industria'
+    },
+    {
+      id: 'jaltest-obd',
+      name: 'skill-jaltest-obd',
+      icon: '🔧',
+      description: 'Diagnóstico OBD con Jaltest para mantenimiento predictivo de vehículos',
+      tier: 'PRO',
+      price: 1800,
+      priceLabel: '€1,800/mes',
+      rating: 4.8,
+      installs: 289,
+      installed: false,
+      category: 'Industria'
+    },
+    {
+      id: 'anomaly-detector',
+      name: 'skill-anomaly-detector',
+      icon: '⚠️',
+      description: 'Detección de anomalías en time series usando NV-Tesseract',
+      tier: 'ENTERPRISE',
+      price: 3500,
+      priceLabel: '€3,500/mes',
+      rating: 4.9,
+      installs: 167,
+      installed: false,
+      category: 'Predicción'
+    },
+    {
+      id: 'shopify-sync',
+      name: 'skill-shopify-sync',
+      icon: '🛍️',
+      description: 'Sincronización bidireccional con Shopify (productos, órdenes, clientes)',
+      tier: 'CORE',
+      price: 0,
+      priceLabel: 'Incluido en plan',
+      rating: 4.7,
+      installs: 567,
+      installed: true,
+      category: 'E-commerce'
+    },
+    {
+      id: 'n8n-orchestrator',
+      name: 'skill-n8n-orchestrator',
+      icon: '⚙️',
+      description: 'Orquestación de workflows N8N desde lenguaje natural',
+      tier: 'PRO',
+      price: 1600,
+      priceLabel: '€1,600/mes',
+      rating: 4.8,
+      installs: 423,
+      installed: false,
+      category: 'Automatización'
+    },
+    {
+      id: 'data-lineage',
+      name: 'skill-data-lineage',
+      icon: '🔗',
+      description: 'Tracking automático de data lineage y data provenance',
+      tier: 'ENTERPRISE',
+      price: 4000,
+      priceLabel: '€4,000/mes',
+      rating: 5.0,
+      installs: 123,
+      installed: false,
+      category: 'Governance'
+    }
+  ]
+
+  const filteredSkills = filter === 'all'
+    ? skills
+    : skills.filter(s => s.tier === filter)
+
+  const getTierColor = (tier: string) => {
+    switch (tier) {
+      case 'CORE':
+        return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+      case 'PRO':
+        return 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+      case 'ENTERPRISE':
+        return 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+      default:
+        return 'bg-slate-500/20 text-slate-400 border-slate-500/30'
+    }
+  }
+
+  const stats = {
+    totalSkills: skills.length,
+    installedSkills: skills.filter(s => s.installed).length,
+    avgRating: (skills.reduce((sum, s) => sum + s.rating, 0) / skills.length).toFixed(1),
+    totalInstalls: skills.reduce((sum, s) => sum + s.installs, 0)
+  }
+
   return (
-    <div className="p-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-white mb-1 glow-text">Marketplace</h1>
-        <p className="text-sm text-slate-400">Discover and install new agent skills</p>
+    <div className="p-8 space-y-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-white mb-2 glow-text">
+          🛒 NemoClaw Marketplace
+        </h1>
+        <p className="text-slate-400">
+          Skills composables - CORE incluidos, PRO y ENTERPRISE con revenue share 70/30
+        </p>
       </div>
 
-      <div className="glass-card border border-white/10 rounded-lg p-12 text-center">
-        <div className="w-14 h-14 rounded-lg glass border border-white/10 flex items-center justify-center mx-auto mb-6">
-          <MarketplaceIcon />
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <StatCard label="Total Skills" value={stats.totalSkills.toString()} />
+        <StatCard label="Instalados" value={stats.installedSkills.toString()} />
+        <StatCard label="Rating Promedio" value={`⭐ ${stats.avgRating}`} />
+        <StatCard label="Total Instalaciones" value={`${(stats.totalInstalls / 1000).toFixed(1)}K`} />
+      </div>
+
+      {/* Filters */}
+      <div className="glass-card border border-white/10 rounded-xl p-4">
+        <div className="flex items-center gap-3">
+          <span className="text-sm text-slate-400">Filtrar por tier:</span>
+          <div className="flex gap-2">
+            {(['all', 'CORE', 'PRO', 'ENTERPRISE'] as const).map(tier => (
+              <button
+                key={tier}
+                onClick={() => setFilter(tier)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  filter === tier
+                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                    : 'bg-white/5 text-slate-400 border border-white/10 hover:bg-white/10'
+                }`}
+              >
+                {tier === 'all' ? 'Todos' : tier}
+              </button>
+            ))}
+          </div>
         </div>
-        <h3 className="text-sm font-semibold text-white mb-2 glow-text">Skill Marketplace</h3>
-        <p className="text-xs text-slate-300 max-w-md mx-auto">
-          Browse and install pre-built agent skills, integrations, and workflow templates coming soon.
-        </p>
+      </div>
+
+      {/* Skills Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredSkills.map(skill => (
+          <div
+            key={skill.id}
+            className="glass-card border border-white/10 rounded-xl p-6 group"
+          >
+            {/* Header */}
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-600/20 flex items-center justify-center text-2xl border border-white/10">
+                  {skill.icon}
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-white">
+                    {skill.name}
+                  </h3>
+                  <p className="text-xs text-slate-400">{skill.category}</p>
+                </div>
+              </div>
+              <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getTierColor(skill.tier)}`}>
+                {skill.tier}
+              </span>
+            </div>
+
+            {/* Description */}
+            <p className="text-sm text-slate-300 mb-4 line-clamp-2">
+              {skill.description}
+            </p>
+
+            {/* Rating & Installs */}
+            <div className="flex items-center gap-4 mb-4 pb-4 border-b border-white/5">
+              <div className="flex items-center gap-1 text-xs text-amber-400">
+                <span>⭐</span>
+                <span>{skill.rating.toFixed(1)}</span>
+              </div>
+              <div className="text-xs text-slate-500">
+                {skill.installs.toLocaleString()} instalaciones
+              </div>
+            </div>
+
+            {/* Price & Action */}
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-lg font-bold text-white">
+                  {skill.price === 0 ? 'Gratis' : `€${skill.price.toLocaleString()}`}
+                </p>
+                <p className="text-xs text-slate-500">{skill.priceLabel}</p>
+              </div>
+              {skill.installed ? (
+                <button className="px-4 py-2 rounded-lg text-xs font-medium bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-default">
+                  ✓ Instalado
+                </button>
+              ) : (
+                <button className="px-4 py-2 rounded-lg text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 transition-all">
+                  Instalar
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Revenue Share Info */}
+      <div className="glass-card border border-purple-500/30 rounded-xl p-6">
+        <div className="flex items-start gap-4">
+          <div className="text-3xl">💰</div>
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-2 glow-text">
+              Modelo de Revenue Share
+            </h3>
+            <p className="text-sm text-slate-300 mb-4">
+              Los developers de skills reciben el 70% de los ingresos, la plataforma retiene el 30%. Crea tus propios skills y monetízalos en el marketplace.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="glass rounded-lg p-4 border border-white/10">
+                <p className="text-2xl font-bold text-purple-400 mb-1">70%</p>
+                <p className="text-xs text-slate-400">Para el Developer</p>
+              </div>
+              <div className="glass rounded-lg p-4 border border-white/10">
+                <p className="text-2xl font-bold text-blue-400 mb-1">30%</p>
+                <p className="text-xs text-slate-400">Para la Plataforma</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
 }
 
-function MarketplaceIcon() {
+function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <svg className="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
-    </svg>
+    <div className="glass-card border border-white/10 rounded-lg p-4">
+      <p className="text-xs text-slate-400 mb-1">{label}</p>
+      <p className="text-2xl font-bold text-white glow-text">{value}</p>
+    </div>
   )
 }

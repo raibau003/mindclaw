@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import MainLayout from './components/layout/MainLayout'
 import Dashboard from './pages/Dashboard'
+import KnowledgeGraph from './pages/KnowledgeGraph'
 import Agents from './pages/Agents'
 import Marketplace from './pages/Marketplace'
 import Integrations from './pages/Integrations'
@@ -15,6 +16,7 @@ function App() {
         <MainLayout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/knowledge-graph" element={<KnowledgeGraph />} />
             <Route path="/agents" element={<Agents />} />
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/integrations" element={<Integrations />} />
