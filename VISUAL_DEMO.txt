@@ -1,0 +1,203 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   🧠 MINDCLAW 3D CONTROL CENTER - DEMO                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                          VISTA SUPERIOR (TOP VIEW)                           │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+              🔧 Data Engineer           👁️ Vision AI         🌐 Web Apps
+              ┏━━━━━━━━━━━━┓            ┏━━━━━━━━━┓          ┏━━━━━━━━━┓
+              ┃ 💻 📊 🔌   ┃            ┃ 📷 🎯   ┃          ┃ 💻 🚀   ┃
+              ┃            ┃            ┃         ┃          ┃         ┃
+              ┃ 8 Pipeline ┃            ┃ 892/hr  ┃          ┃ 18 Apps ┃
+              ┃ 156 TB/day ┃            ┃ 94% Acc ┃          ┃ 99.9% Up┃
+              ┗━━━━━━━━━━━━┛            ┗━━━━━━━━━┛          ┗━━━━━━━━━┛
+                    ╲                        │                    ╱
+                     ╲                       │                   ╱
+                      ╲                      │                  ╱
+                       ╲                     ▼                 ╱
+                        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+                        ┃     🎯 ORCHESTRATION LAYER        ┃
+                        ┃     ═══════════════════════       ┃
+                        ┃     🤖 ⚡ 🔄                      ┃
+                        ┃                                   ┃
+                        ┃     24 Agents    98% Uptime       ┃
+                        ┃     1.2k Tasks/day                ┃
+                        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                       ╱                     │                 ╲
+                      ╱                      │                  ╲
+                     ╱                       │                   ╲
+                    ╱                        ▼                    ╲
+              ┏━━━━━━━━━━━━┓            ┏━━━━━━━━━┓          ┏━━━━━━━━━┓
+              ┃ 📈 BI &    ┃            ┃ 🧪 Data ┃          ┃ ⚙️ Auto ┃
+              ┃ Analytics  ┃            ┃ Science ┃          ┃ mation  ┃
+              ┃            ┃            ┃         ┃          ┃         ┃
+              ┃ 📊 📉     ┃            ┃ 🧠 🔬 📐┃          ┃ 🔁 ⏱️ 🎪┃
+              ┃            ┃            ┃         ┃          ┃         ┃
+              ┃ 128 Report ┃            ┃ 12 Model┃          ┃ 42 Work ┃
+              ┃ 24 Dashbrd ┃            ┃ TRAINING┃          ┃ 3.4k Run┃
+              ┗━━━━━━━━━━━━┛            ┗━━━━━━━━━┛          ┗━━━━━━━━━┛
+
+                                  ┏━━━━━━━━━━━━━┓
+                                  ┃ 🛡️ Governan ┃
+                                  ┃ ce & Compli ┃
+                                  ┃             ┃
+                                  ┃ 🔒 📋      ┃
+                                  ┃             ┃
+                                  ┃ COMING SOON ┃
+                                  ┗━━━━━━━━━━━━━┛
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                        VISTA ISOMÉTRICA 3D (REAL)                            │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+                                    ___
+                     🔧           ,'   `.          👁️
+                    ╱│╲         ╱       ╲        ╱│╲
+                   ╱ │ ╲       ╱    🎯   ╲      ╱ │ ╲
+                  ╱  │  ╲     ╱           ╲    ╱  │  ╲
+                 ╱   │   ╲   ╱             ╲  ╱   │   ╲
+                ╱____│____╲ ╱_______________╲╱____│____╲
+                │Data Eng ││   ORCHESTRATE  ││ Vision  │
+                │         ││                ││         │
+                │💻📊🔌  ││      🤖⚡🔄     ││ 📷🎯   │
+                └─────────┘└────────────────┘└─────────┘
+                    ╲              │              ╱
+                     ╲             │             ╱
+                      ╲            │            ╱
+               ___     ╲___        │        ___╱     ___
+              ╱   `.    ╲  `.      │      ,'  ╱    ,'   ╲
+             ╱      ╲    ╲   ╲     │     ╱   ╱    ╱      ╲
+            ╱________╲____╲___╲____│____╱___╱____╱________╲
+            │📈 BI    │🧪 DS │    🛡️    │⚙️ Auto│🌐 Apps │
+            │ Analyt  │ Scien│  Govern  │ mation │        │
+            │📊📉    │🧠🔬📐│  🔒📋  │🔁⏱️🎪│💻🚀   │
+            └─────────┴──────┴──────────┴────────┴────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                            ESTADO DE ISLAS                                   │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ ISLA                STATUS      WORKERS    MÉTRICA 1    MÉTRICA 2          ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ 🎯 Orchestration    🟢 ACTIVE   🤖⚡🔄     24 Agents    1.2k Tasks/day     ┃
+┃ 🔧 Data Engineer    🟢 ACTIVE   💻📊       8 Pipelines  156 TB/day         ┃
+┃ ⚙️ Automation        🟢 ACTIVE   🔁⏱️🎪     42 Workflows 3.4k Runs/day      ┃
+┃ 📈 BI & Analytics   🟢 ACTIVE   📊📉       128 Reports  24 Dashboards      ┃
+┃ 🧪 Data Science     🟡 TRAINING 🧠🔬📐     12 Models    89% Accuracy       ┃
+┃ 👁️ Vision AI        🟢 ACTIVE   📷🎯       892 imgs/hr  94% Accuracy       ┃
+┃ 🌐 Web Apps         🟢 ACTIVE   💻🚀       18 Apps      99.9% Uptime       ┃
+┃ 🛡️ Governance       ⚪ SOON     🔒📋       0 Incidents  100% Compliant     ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                          CONEXIONES ACTIVAS                                  │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+Orchestration Layer ━━━━━━━━━━━━━━━━━━┓
+                                       ┃
+  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+  ┃                                    ┃
+  ┣━━━━━→ Data Engineer                ┃
+  ┃      (ETL Pipelines)               ┃
+  ┃                                    ┃
+  ┣━━━━━→ Automation Hub               ┃
+  ┃      (N8N Workflows)               ┃
+  ┃                                    ┃
+  ┣━━━━━→ BI & Analytics               ┃
+  ┃      (Dashboards)                  ┃
+  ┃                                    ┃
+  ┣━━━━━→ Data Science                 ┃
+  ┃      (ML Models)                   ┃
+  ┃                                    ┃
+  ┣━━━━━→ Vision AI                    ┃
+  ┃      (OCR/Detection)               ┃
+  ┃                                    ┃
+  ┣━━━━━→ Web Apps                     ┃
+  ┃      (Deployments)                 ┃
+  ┃                                    ┃
+  ┗━━━━━→ Governance                   ┃
+         (Compliance)                  ┃
+                                       ┃
+Cross-island connections:              ┃
+  Data Engineer ←→ Vision AI           ┃
+  Automation ←→ Web Apps               ┃
+  BI Analytics ←→ Data Science         ┃
+                                       ┃
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         PALETA DE COLORES                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  ███████  #A8DAFF   Azul claro (Data Engineer, Vision AI)
+  ███████  #B8F4C8   Verde menta (Orchestration, Automation)
+  ███████  #FFE8A3   Amarillo suave (BI & Analytics)
+  ███████  #FFB8D1   Rosa pastel (Web Apps)
+  ███████  #D4BFFF   Púrpura suave (Data Science)
+  ███████  #BFEEFF   Cyan (Vision AI)
+  ███████  #FFB7B7   Rojo suave (Governance)
+  ███████  #F0F7FF   Fondo gradiente
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         CONTROLES INTERACTIVOS                               │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  🖱️  DRAG          →  Rotar vista 3D
+  🖱️  SCROLL        →  Zoom in/out
+  🖱️  CLICK (isla)  →  Ver detalles en modal
+  🔄  RESET VIEW    →  Volver a posición inicial
+  ⟳   AUTO ROTATE   →  Rotación automática continua
+  ❌  CLOSE         →  Cerrar modal
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         CARACTERÍSTICAS TÉCNICAS                             │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  📦  Tamaño:           40 KB (sin dependencias)
+  📄  Líneas de código: 1,086
+  🎨  CSS 3D Transforms: Efecto isométrico
+  ⚡  Canvas API:        Partículas animadas
+  🔄  Animaciones:       60 FPS constante
+  📱  Responsive:        Desktop, tablet, mobile
+  🌐  Navegadores:       Chrome, Firefox, Safari, Edge
+  💾  Memoria:           ~15 MB en uso
+  ⏱️  Carga:             < 100ms
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         ARCHIVOS GENERADOS                                   │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  ✅  /Users/javiercorrea/mindclaw/public/index.html (40KB)
+  ✅  /Users/javiercorrea/mindclaw/public/mindclaw_3d_control_center.html (40KB)
+  ✅  /Users/javiercorrea/mindclaw/public/README_CONTROL_CENTER.md
+  ✅  /Users/javiercorrea/mindclaw/open_control_center.sh (ejecutable)
+  ✅  /Users/javiercorrea/mindclaw/CONTROL_CENTER_COMPLETADO.md
+  ✅  /Users/javiercorrea/mindclaw/QUICK_START.md
+  ✅  /Users/javiercorrea/mindclaw/VISUAL_DEMO.txt (este archivo)
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         CÓMO ABRIR                                           │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Método 1 (Más rápido):
+  $ open /Users/javiercorrea/mindclaw/public/index.html
+
+  Método 2 (Script interactivo):
+  $ /Users/javiercorrea/mindclaw/open_control_center.sh
+
+  Método 3 (Servidor local):
+  $ cd /Users/javiercorrea/mindclaw/public
+  $ python3 -m http.server 8000
+  → Abrir: http://localhost:8000
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                        ✅ MISIÓN COMPLETADA                                  ║
+║                                                                              ║
+║  El Centro de Control 3D Isométrico para MindClaw está listo y funcional.   ║
+║  Abre index.html y explora tu dashboard interactivo profesional.            ║
+║                                                                              ║
+║                      Creado: 2026-03-22                                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
