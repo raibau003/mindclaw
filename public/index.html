@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindClaw Complete Dashboard - All Agents</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f1f5f9;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0f1e;
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .app {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-right: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .logo {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo p {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        .nav {
+            flex: 1;
+            padding: 1rem 0;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section-title {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.05);
+            border-left-color: var(--primary);
+        }
+
+        .nav-item.active {
+            background: rgba(59, 130, 246, 0.15);
+            border-left-color: var(--primary);
+        }
+
+        .nav-badge {
+            background: var(--secondary);
+            color: white;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #1e293b;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .header-title p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding-bottom: 0;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        .tab:hover {
+            color: #e2e8f0;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Agents Grid */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .agent-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+            transform: translate(30%, -30%);
+        }
+
+        .agent-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .agent-icon {
+            font-size: 2.5rem;
+        }
+
+        .agent-status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-training {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .status-idle {
+            background: rgba(100, 116, 139, 0.2);
+            color: #64748b;
+        }
+
+        .agent-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-description {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .agent-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        .agent-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            flex: 1;
+        }
+
+        /* Knowledge Graph */
+        .graph-container {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .graph-canvas {
+            background: #0f172a;
+            border-radius: 8px;
+            min-height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .graph-node {
+            position: absolute;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+            padding: 1rem;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .graph-node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+        }
+
+        .graph-node-icon {
+            font-size: 1.5rem;
+        }
+
+        .graph-node-label {
+            font-size: 0.65rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+
+        .graph-connection {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.5) 0%, rgba(139, 92, 246, 0.5) 100%);
+            transform-origin: left center;
+            pointer-events: none;
+        }
+
+        /* Marketplace */
+        .marketplace-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-marketplace-card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-marketplace-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-icon-big {
+            font-size: 2rem;
+        }
+
+        .skill-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-tier {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tier-core {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .tier-pro {
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+        }
+
+        .tier-enterprise {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .skill-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .skill-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-top: 1rem;
+        }
+
+        /* APIs Panel */
+        .apis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .api-card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .api-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .api-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .api-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .api-enabled {
+            background: #10b981;
+        }
+
+        .api-disabled {
+            background: #64748b;
+        }
+
+        .api-endpoint {
+            background: #0f172a;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            color: #60a5fa;
+        }
+
+        .api-methods {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .method-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .method-get {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .method-post {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .method-put {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+            height: 600px;
+        }
+
+        .chat-agents-list {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .chat-agent-item {
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chat-agent-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .chat-agent-item.active {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+
+        .chat-main {
+            background: #1e293b;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .message-user {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+
+        .message-agent {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-text {
+            background: #0f172a;
+            padding: 1rem;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .chat-input {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .input-group input {
+            flex: 1;
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>🧠 MindClaw</h1>
+                <p>Complete Control Center</p>
+            </div>
+
+            <nav class="nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">VISTAS</div>
+                    <div class="nav-item active" onclick="showTab('agents')">
+                        <span>🤖</span>
+                        <span>Todos los Agentes</span>
+                        <span class="nav-badge">7</span>
+                    </div>
+                    <div class="nav-item" onclick="showTab('graph')">
+                        <span>🕸️</span>
+                        <span>Knowledge Graph</span>
+                    </div>
+                    <div class="nav-item" onclick="showTab('marketplace')">
+                        <span>🛒</span>
+                        <span>Marketplace</span>
+                        <span class="nav-badge">50+</span>
+                    </div>
+                    <div class="nav-item" onclick="showTab('apis')">
+                        <span>🔌</span>
+                        <span>APIs & Conectores</span>
+                        <span class="nav-badge">15</span>
+                    </div>
+                    <div class="nav-item" onclick="showTab('chat')">
+                        <span>💬</span>
+                        <span>Chat con Agentes</span>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">AGENTES</div>
+                    <div class="nav-item">
+                        <span>🔧</span>
+                        <span>Data Engineer</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>⚙️</span>
+                        <span>Automation</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>📊</span>
+                        <span>BI & Analytics</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>🔬</span>
+                        <span>Data Science</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>👁️</span>
+                        <span>Vision</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>🌐</span>
+                        <span>Web Apps</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>🔒</span>
+                        <span>Governance</span>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">SKILLS</div>
+                    <div class="nav-item">
+                        <span>🔌</span>
+                        <span>Conectores</span>
+                        <span class="nav-badge">20</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>🧹</span>
+                        <span>Data Cleaning</span>
+                        <span class="nav-badge">8</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>🔄</span>
+                        <span>Transformations</span>
+                        <span class="nav-badge">12</span>
+                    </div>
+                    <div class="nav-item">
+                        <span>🤖</span>
+                        <span>ML & AI</span>
+                        <span class="nav-badge">10</span>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <header class="header">
+                <div class="header-title">
+                    <h2>🧠 MindClaw Complete Dashboard</h2>
+                    <p>7 agentes • 50+ skills • 15 APIs • Knowledge Graph con 247 entidades</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">
+                        <span>📊</span>
+                        <span>Reportes</span>
+                    </button>
+                    <button class="btn btn-primary">
+                        <span>➕</span>
+                        <span>Nuevo Proyecto</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- Tab: All Agents -->
+                <div id="tab-agents" class="tab-content active">
+                    <h2 style="margin-bottom: 2rem; font-size: 2rem;">🤖 Todos los Agentes de MindClaw</h2>
+
+                    <div class="agents-grid">
+                        <!-- Data Engineer Agent -->
+                        <div class="agent-card">
+                            <div class="agent-header">
+                                <div class="agent-icon">🔧</div>
+                                <div class="agent-status-badge status-active">ACTIVO</div>
+                            </div>
+                            <div class="agent-name">Data Engineer Agent</div>
+                            <div class="agent-description">
+                                Conecta fuentes, limpia datos, genera pipelines automáticos y mantiene tu data warehouse sin intervención humana.
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">1.2K</div>
+                                    <div class="metric-label">Records/min</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">99.8%</div>
+                                    <div class="metric-label">Success Rate</div>
+                                </div>
+                            </div>
+                            <div class="agent-actions">
+                                <button class="btn btn-primary btn-small">Ver Pipelines</button>
+                                <button class="btn btn-secondary btn-small">Configurar</button>
+                            </div>
+                        </div>
+
+                        <!-- Automation Agent -->
+                        <div class="agent-card">
+                            <div class="agent-header">
+                                <div class="agent-icon">⚙️</div>
+                                <div class="agent-status-badge status-active">ACTIVO</div>
+                            </div>
+                            <div class="agent-name">Automation Agent</div>
+                            <div class="agent-description">
+                                Web scraping inteligente, RPA adaptativo, orquestación de APIs y generación automática de workflows N8N.
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">5</div>
+                                    <div class="metric-label">Workflows</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">100%</div>
+                                    <div class="metric-label">Uptime 24h</div>
+                                </div>
+                            </div>
+                            <div class="agent-actions">
+                                <button class="btn btn-primary btn-small">Ver Workflows</button>
+                                <button class="btn btn-secondary btn-small">Nuevo RPA</button>
+                            </div>
+                        </div>
+
+                        <!-- BI & Analytics Agent -->
+                        <div class="agent-card">
+                            <div class="agent-header">
+                                <div class="agent-icon">📊</div>
+                                <div class="agent-status-badge status-active">ACTIVO</div>
+                            </div>
+                            <div class="agent-name">BI & Analytics Agent</div>
+                            <div class="agent-description">
+                                Genera dashboards desde lenguaje natural, responde queries en NL, detecta anomalías y crea narrativas auto-explicativas.
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">347</div>
+                                    <div class="metric-label">Queries/día</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">23</div>
+                                    <div class="metric-label">Dashboards</div>
+                                </div>
+                            </div>
+                            <div class="agent-actions">
+                                <button class="btn btn-primary btn-small">Ver Dashboards</button>
+                                <button class="btn btn-secondary btn-small">Nueva Query</button>
+                            </div>
+                        </div>
+
+                        <!-- Data Science Agent -->
+                        <div class="agent-card">
+                            <div class="agent-header">
+                                <div class="agent-icon">🔬</div>
+                                <div class="agent-status-badge status-training">ENTRENANDO</div>
+                            </div>
+                            <div class="agent-name">Data Science Agent</div>
+                            <div class="agent-description">
+                                Forecasting, churn prediction, segmentación RFM, recomendaciones y detección de anomalías sin necesidad de data scientist.
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">89.4%</div>
+                                    <div class="metric-label">Model Accuracy</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">8 min</div>
+                                    <div class="metric-label">ETA</div>
+                                </div>
+                            </div>
+                            <div class="agent-actions">
+                                <button class="btn btn-primary btn-small">Ver Modelos</button>
+                                <button class="btn btn-secondary btn-small">Entrenar</button>
+                            </div>
+                        </div>
+
+                        <!-- Vision Agent -->
+                        <div class="agent-card">
+                            <div class="agent-header">
+                                <div class="agent-icon">👁️</div>
+                                <div class="agent-status-badge status-idle">Q3 2026</div>
+                            </div>
+                            <div class="agent-name">Vision Agent</div>
+                            <div class="agent-description">
+                                Análisis de video/imagen en tiempo real: PPE detection, ergonomía, inspección visual de equipos, retail inventory counting.
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">0</div>
+                                    <div class="metric-label">Detections</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">Q3</div>
+                                    <div class="metric-label">Disponible</div>
+                                </div>
+                            </div>
+                            <div class="agent-actions">
+                                <button class="btn btn-secondary btn-small" disabled>Próximamente</button>
+                            </div>
+                        </div>
+
+                        <!-- Web Apps Agent -->
+                        <div class="agent-card">
+                            <div class="agent-header">
+                                <div class="agent-icon">🌐</div>
+                                <div class="agent-status-badge status-active">ACTIVO</div>
+                            </div>
+                            <div class="agent-name">Web Apps Agent</div>
+                            <div class="agent-description">
+                                Genera aplicaciones web completas desde descripción en lenguaje natural. Frontend + Backend + DB integrados automáticamente.
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">12</div>
+                                    <div class="metric-label">Apps Creadas</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">4.2K</div>
+                                    <div class="metric-label">LOC Generado</div>
+                                </div>
+                            </div>
+                            <div class="agent-actions">
+                                <button class="btn btn-primary btn-small">Ver Apps</button>
+                                <button class="btn btn-secondary btn-small">Nueva App</button>
+                            </div>
+                        </div>
+
+                        <!-- Governance Agent -->
+                        <div class="agent-card">
+                            <div class="agent-header">
+                                <div class="agent-icon">🔒</div>
+                                <div class="agent-status-badge status-active">ACTIVO</div>
+                            </div>
+                            <div class="agent-name">Governance Agent</div>
+                            <div class="agent-description">
+                                Guardrails de seguridad, PII redaction, data catalog, lineage tracking, access control y compliance configurable.
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <div class="metric-value">247</div>
+                                    <div class="metric-label">Entidades</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value">100%</div>
+                                    <div class="metric-label">Compliance</div>
+                                </div>
+                            </div>
+                            <div class="agent-actions">
+                                <button class="btn btn-primary btn-small">Ver Catalog</button>
+                                <button class="btn btn-secondary btn-small">Auditoría</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Knowledge Graph -->
+                <div id="tab-graph" class="tab-content">
+                    <h2 style="margin-bottom: 2rem; font-size: 2rem;">🕸️ Knowledge Graph - Memoria del Sistema</h2>
+
+                    <div class="graph-container">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                            <div>
+                                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Grafo de Conocimiento Semántico</h3>
+                                <p style="color: #94a3b8;">247 entidades • 834 relaciones • 3 niveles de profundidad</p>
+                            </div>
+                            <div style="display: flex; gap: 1rem;">
+                                <button class="btn btn-secondary">Expandir Nodo</button>
+                                <button class="btn btn-primary">Buscar Entidad</button>
+                            </div>
+                        </div>
+
+                        <div class="graph-canvas" id="graphCanvas">
+                            <!-- Central node -->
+                            <div class="graph-node" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <div class="graph-node-icon">🧠</div>
+                                <div class="graph-node-label">MindClaw</div>
+                            </div>
+
+                            <!-- Data nodes -->
+                            <div class="graph-node" style="top: 20%; left: 30%;">
+                                <div class="graph-node-icon">👥</div>
+                                <div class="graph-node-label">Clientes</div>
+                            </div>
+
+                            <div class="graph-node" style="top: 20%; left: 70%;">
+                                <div class="graph-node-icon">📦</div>
+                                <div class="graph-node-label">Productos</div>
+                            </div>
+
+                            <div class="graph-node" style="top: 50%; left: 15%;">
+                                <div class="graph-node-icon">💰</div>
+                                <div class="graph-node-label">Ventas</div>
+                            </div>
+
+                            <div class="graph-node" style="top: 50%; left: 85%;">
+                                <div class="graph-node-icon">🏢</div>
+                                <div class="graph-node-label">Empresas</div>
+                            </div>
+
+                            <div class="graph-node" style="top: 80%; left: 30%;">
+                                <div class="graph-node-icon">📊</div>
+                                <div class="graph-node-label">Métricas</div>
+                            </div>
+
+                            <div class="graph-node" style="top: 80%; left: 70%;">
+                                <div class="graph-node-icon">🔄</div>
+                                <div class="graph-node-label">Pipelines</div>
+                            </div>
+
+                            <div class="graph-node" style="top: 35%; left: 50%;">
+                                <div class="graph-node-icon">🗄️</div>
+                                <div class="graph-node-label">SAP B1</div>
+                            </div>
+
+                            <div class="graph-node" style="top: 65%; left: 50%;">
+                                <div class="graph-node-icon">🎯</div>
+                                <div class="graph-node-label">KPIs</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: #0f172a; border-radius: 8px;">
+                            <h4 style="margin-bottom: 1rem;">Estadísticas del Grafo</h4>
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
+                                <div>
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--secondary);">247</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">Entidades Totales</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--secondary);">834</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">Relaciones</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--secondary);">3</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">Niveles Profundidad</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--secondary);">5.2GB</div>
+                                    <div style="font-size: 0.85rem; color: #94a3b8;">Tamaño Vector DB</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Marketplace -->
+                <div id="tab-marketplace" class="tab-content">
+                    <h2 style="margin-bottom: 2rem; font-size: 2rem;">🛒 NemoClaw Skill Marketplace</h2>
+
+                    <div style="margin-bottom: 2rem; display: flex; gap: 1rem;">
+                        <button class="btn btn-secondary">Todos</button>
+                        <button class="btn btn-secondary">Conectores</button>
+                        <button class="btn btn-secondary">Analytics</button>
+                        <button class="btn btn-secondary">Automation</button>
+                        <button class="btn btn-secondary">ML & AI</button>
+                        <button class="btn btn-secondary">Governance</button>
+                    </div>
+
+                    <div class="marketplace-grid">
+                        <div class="skill-marketplace-card">
+                            <div class="skill-header">
+                                <div class="skill-icon-big">🔌</div>
+                                <div class="skill-info">
+                                    <h4>skill-sap-connector</h4>
+                                    <span class="skill-tier tier-core">CORE</span>
+                                </div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">
+                                Conecta a SAP B1 / S4 HANA con autodiscovery de módulos FI, CO, MM, SD. DI API + Service Layer.
+                            </p>
+                            <div class="skill-stats">
+                                <span>⭐ 4.8/5</span>
+                                <span>📥 1.2K installs</span>
+                                <span>✓ Certificado</span>
+                            </div>
+                            <div class="skill-price">Incluido en plan</div>
+                        </div>
+
+                        <div class="skill-marketplace-card">
+                            <div class="skill-header">
+                                <div class="skill-icon-big">🧹</div>
+                                <div class="skill-info">
+                                    <h4>skill-data-cleaner</h4>
+                                    <span class="skill-tier tier-core">CORE</span>
+                                </div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">
+                                Deduplicación ML, null handling, outlier detection, estandarización de formatos y validación de tipos.
+                            </p>
+                            <div class="skill-stats">
+                                <span>⭐ 4.9/5</span>
+                                <span>📥 2.8K installs</span>
+                                <span>✓ Certificado</span>
+                            </div>
+                            <div class="skill-price">Incluido en plan</div>
+                        </div>
+
+                        <div class="skill-marketplace-card">
+                            <div class="skill-header">
+                                <div class="skill-icon-big">🔬</div>
+                                <div class="skill-info">
+                                    <h4>skill-churn-predictor</h4>
+                                    <span class="skill-tier tier-pro">PRO</span>
+                                </div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">
+                                Score de churn 0-100 con explicabilidad SHAP. Top 3 factores de riesgo por cliente con acciones sugeridas.
+                            </p>
+                            <div class="skill-stats">
+                                <span>⭐ 4.7/5</span>
+                                <span>📥 847 installs</span>
+                                <span>✓ Certificado</span>
+                            </div>
+                            <div class="skill-price">€2,000/mes</div>
+                        </div>
+
+                        <div class="skill-marketplace-card">
+                            <div class="skill-header">
+                                <div class="skill-icon-big">🌐</div>
+                                <div class="skill-info">
+                                    <h4>skill-web-scraper</h4>
+                                    <span class="skill-tier tier-pro">PRO</span>
+                                </div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">
+                                Playwright + Vision LLM. Se adapta a cambios de estructura web. Anti-bot bypass integrado.
+                            </p>
+                            <div class="skill-stats">
+                                <span>⭐ 4.6/5</span>
+                                <span>📥 1.5K installs</span>
+                                <span>✓ Certificado</span>
+                            </div>
+                            <div class="skill-price">€1,500/mes</div>
+                        </div>
+
+                        <div class="skill-marketplace-card">
+                            <div class="skill-header">
+                                <div class="skill-icon-big">🎯</div>
+                                <div class="skill-info">
+                                    <h4>skill-nl2sql</h4>
+                                    <span class="skill-tier tier-pro">PRO</span>
+                                </div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">
+                                Lenguaje natural a SQL optimizado. Compatible con Snowflake, BigQuery, PostgreSQL. Fine-tuned en queries enterprise.
+                            </p>
+                            <div class="skill-stats">
+                                <span>⭐ 4.9/5</span>
+                                <span>📥 3.2K installs</span>
+                                <span>✓ Certificado</span>
+                            </div>
+                            <div class="skill-price">€1,800/mes</div>
+                        </div>
+
+                        <div class="skill-marketplace-card">
+                            <div class="skill-header">
+                                <div class="skill-icon-big">🔒</div>
+                                <div class="skill-info">
+                                    <h4>skill-pii-redactor</h4>
+                                    <span class="skill-tier tier-enterprise">ENTERPRISE</span>
+                                </div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">
+                                Redacción automática de PII en logs, datasets y documentos. GDPR compliant. Audit trail completo.
+                            </p>
+                            <div class="skill-stats">
+                                <span>⭐ 5.0/5</span>
+                                <span>📥 432 installs</span>
+                                <span>✓ Certificado</span>
+                            </div>
+                            <div class="skill-price">€5,000/mes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: APIs -->
+                <div id="tab-apis" class="tab-content">
+                    <h2 style="margin-bottom: 2rem; font-size: 2rem;">🔌 APIs & Conectores Disponibles</h2>
+
+                    <div class="apis-grid">
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">SAP Business One API</div>
+                                <div class="api-status api-enabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">Service Layer + DI API para integración completa</p>
+                            <div class="api-endpoint">POST /api/sap/connect</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="method-badge method-post">POST</span>
+                            </div>
+                        </div>
+
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">PostgreSQL Connector</div>
+                                <div class="api-status api-enabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">Conexión directa a bases de datos PostgreSQL</p>
+                            <div class="api-endpoint">POST /api/db/postgres/query</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="method-badge method-post">POST</span>
+                            </div>
+                        </div>
+
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">Mapón GPS API</div>
+                                <div class="api-status api-enabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">Telemetría y posicionamiento de flota en tiempo real</p>
+                            <div class="api-endpoint">GET /api/fleet/position</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-get">GET</span>
+                            </div>
+                        </div>
+
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">Jaltest OBD API</div>
+                                <div class="api-status api-enabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">Diagnóstico OBD y códigos de falla de vehículos</p>
+                            <div class="api-endpoint">GET /api/jaltest/diagnostics</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-get">GET</span>
+                            </div>
+                        </div>
+
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">Shopify Ecommerce</div>
+                                <div class="api-status api-enabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">Productos, pedidos, clientes e inventario</p>
+                            <div class="api-endpoint">GET /api/shopify/orders</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="method-badge method-post">POST</span>
+                            </div>
+                        </div>
+
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">N8N Workflow Engine</div>
+                                <div class="api-status api-enabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">Generación y ejecución de workflows automáticos</p>
+                            <div class="api-endpoint">POST /api/n8n/workflow/create</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="method-badge method-put">PUT</span>
+                            </div>
+                        </div>
+
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">OpenAI Models</div>
+                                <div class="api-status api-disabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">GPT-4, DALL-E, Whisper para tareas avanzadas</p>
+                            <div class="api-endpoint">POST /api/openai/completion</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-post">POST</span>
+                            </div>
+                        </div>
+
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">Slack Notifications</div>
+                                <div class="api-status api-enabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">Envío de notificaciones y alertas a canales</p>
+                            <div class="api-endpoint">POST /api/slack/send</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-post">POST</span>
+                            </div>
+                        </div>
+
+                        <div class="api-card">
+                            <div class="api-header">
+                                <div class="api-name">Email SMTP</div>
+                                <div class="api-status api-enabled"></div>
+                            </div>
+                            <p style="color: #94a3b8; margin-bottom: 1rem;">Envío de emails automáticos con plantillas</p>
+                            <div class="api-endpoint">POST /api/email/send</div>
+                            <div class="api-methods">
+                                <span class="method-badge method-post">POST</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Chat -->
+                <div id="tab-chat" class="tab-content">
+                    <h2 style="margin-bottom: 2rem; font-size: 2rem;">💬 Chat con Agentes</h2>
+
+                    <div class="chat-container">
+                        <div class="chat-agents-list">
+                            <h4 style="margin-bottom: 1rem; font-size: 0.9rem; color: #94a3b8;">SELECCIONA UN AGENTE</h4>
+                            <div class="chat-agent-item active">
+                                <span style="font-size: 1.5rem;">🔧</span>
+                                <div>
+                                    <div style="font-weight: 600;">Data Engineer</div>
+                                    <div style="font-size: 0.75rem; color: #94a3b8;">En línea</div>
+                                </div>
+                            </div>
+                            <div class="chat-agent-item">
+                                <span style="font-size: 1.5rem;">⚙️</span>
+                                <div>
+                                    <div style="font-weight: 600;">Automation</div>
+                                    <div style="font-size: 0.75rem; color: #94a3b8;">En línea</div>
+                                </div>
+                            </div>
+                            <div class="chat-agent-item">
+                                <span style="font-size: 1.5rem;">📊</span>
+                                <div>
+                                    <div style="font-weight: 600;">BI & Analytics</div>
+                                    <div style="font-size: 0.75rem; color: #94a3b8;">En línea</div>
+                                </div>
+                            </div>
+                            <div class="chat-agent-item">
+                                <span style="font-size: 1.5rem;">🔬</span>
+                                <div>
+                                    <div style="font-weight: 600;">Data Science</div>
+                                    <div style="font-size: 0.75rem; color: #94a3b8;">Entrenando...</div>
+                                </div>
+                            </div>
+                            <div class="chat-agent-item">
+                                <span style="font-size: 1.5rem;">🌐</span>
+                                <div>
+                                    <div style="font-weight: 600;">Web Apps</div>
+                                    <div style="font-size: 0.75rem; color: #94a3b8;">En línea</div>
+                                </div>
+                            </div>
+                            <div class="chat-agent-item">
+                                <span style="font-size: 1.5rem;">🔒</span>
+                                <div>
+                                    <div style="font-weight: 600;">Governance</div>
+                                    <div style="font-size: 0.75rem; color: #94a3b8;">En línea</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-main">
+                            <div class="chat-header">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div style="font-size: 2rem;">🔧</div>
+                                    <div>
+                                        <h3 style="font-size: 1.2rem;">Data Engineer Agent</h3>
+                                        <p style="font-size: 0.85rem; color: #94a3b8;">Conecta datos, genera pipelines, mantiene data warehouse</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chat-messages">
+                                <div class="chat-message">
+                                    <div class="message-avatar message-agent">🔧</div>
+                                    <div class="message-content">
+                                        <div class="message-name">Data Engineer Agent</div>
+                                        <div class="message-text">
+                                            ¡Hola! Soy tu Data Engineer Agent. Puedo ayudarte a:
+                                            <br><br>
+                                            • Conectar a SAP B1, PostgreSQL, MySQL, APIs<br>
+                                            • Limpiar y validar datos automáticamente<br>
+                                            • Generar pipelines de ETL completos<br>
+                                            • Crear y mantener tu data warehouse<br>
+                                            <br>
+                                            ¿Qué necesitas hoy?
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="chat-message">
+                                    <div class="message-avatar message-user">👤</div>
+                                    <div class="message-content">
+                                        <div class="message-name">Usuario</div>
+                                        <div class="message-text">
+                                            Necesito conectar nuestro SAP B1 con PostgreSQL y crear un pipeline que sincronice los clientes cada hora.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="chat-message">
+                                    <div class="message-avatar message-agent">🔧</div>
+                                    <div class="message-content">
+                                        <div class="message-name">Data Engineer Agent</div>
+                                        <div class="message-text">
+                                            Perfecto, voy a configurar eso para ti:
+                                            <br><br>
+                                            ✓ Detectando SAP B1 en tu infraestructura...<br>
+                                            ✓ Conectando a PostgreSQL...<br>
+                                            ✓ Generando pipeline SAP_to_Postgres_Clientes<br>
+                                            ✓ Configurando sincronización cada hora<br>
+                                            <br>
+                                            El pipeline está listo. Primera ejecución en 2 minutos. ¿Quieres ver el dashboard de monitoreo?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chat-input">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Escribe tu mensaje al Data Engineer Agent...">
+                                    <button class="btn btn-primary">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            // Update nav active state
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.nav-item').classList.add('active');
+        }
+
+        // Animate graph nodes
+        const graphNodes = document.querySelectorAll('.graph-node');
+        graphNodes.forEach((node, index) => {
+            node.style.animation = `fadeIn 0.5s ease-out ${index * 0.1}s forwards`;
+            node.style.opacity = '0';
+        });
+
+        // Add animation keyframe
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.8);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Simulate metric updates
+        setInterval(() => {
+            document.querySelectorAll('.metric-value').forEach(metric => {
+                if (metric.textContent.includes('%') && !metric.textContent.includes('Q')) {
+                    const current = parseFloat(metric.textContent);
+                    const change = (Math.random() - 0.5) * 0.3;
+                    metric.textContent = Math.max(0, Math.min(100, current + change)).toFixed(1) + '%';
+                } else if (metric.textContent.includes('K') && !metric.textContent.includes('.')) {
+                    const current = parseFloat(metric.textContent);
+                    const change = (Math.random() - 0.5) * 0.2;
+                    metric.textContent = Math.max(0, current + change).toFixed(1) + 'K';
+                } else if (!isNaN(parseInt(metric.textContent)) && !metric.textContent.includes('min') && !metric.textContent.includes('Q')) {
+                    const current = parseInt(metric.textContent);
+                    const change = Math.floor((Math.random() - 0.5) * 10);
+                    metric.textContent = Math.max(0, current + change);
+                }
+            });
+        }, 3000);
+
+        // Chat agent selection
+        document.querySelectorAll('.chat-agent-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.chat-agent-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
